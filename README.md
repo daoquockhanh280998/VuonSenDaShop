@@ -8,6 +8,7 @@
 		-Branch Develop: nhánh phát triển
 		-Các nhánh feature sẽ dc đặt tên như sao vd feature/solution_folder sao đó ta tạo pull request vào nhánh develop cho người nhận có thể xem review code
 			-khi đã dc merged  pull request thì thằng develop sẽ có code mới nhất
+			-khi ta tạo ra  feature mới thì sẽ  k ảnh hưởng đến feature khác khi ta code trên 1 feature nào đó người dc chỉ định merged vào sẽ xem code nếu code ổn thì merged vào hệ thống
 # 5/ Solution Struce(có 2 mô hình khi triển khai dự án)
 	-Mô hình N layer(gồm 3 tầng data, business, prenstation) theo hướng data driven design tức là thiết kế theo hướng dữ liệu như bảng gì data như thế nào
 	-Mô hình DDD (domain driven design) mô hình này hướng theo khi nghiệp vụ phức tạp, theo entity 
