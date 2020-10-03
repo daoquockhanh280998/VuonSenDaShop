@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuonSenDaShop.WebApp", "VuonSenDaShop.WebApp\VuonSenDaShop.WebApp.csproj", "{C79E6A14-3FE8-466D-9DA8-89F2059D559B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VuonSenDaShop.WebApp", "VuonSenDaShop.WebApp\VuonSenDaShop.WebApp.csproj", "{C79E6A14-3FE8-466D-9DA8-89F2059D559B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AE8756E9-89EF-43CF-B2AD-D8155A925176}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
