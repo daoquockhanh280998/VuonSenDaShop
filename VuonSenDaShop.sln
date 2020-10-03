@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuonSenDaShop.Data", "VuonSenDa.Data\VuonSenDaShop.Data.csproj", "{19AB3C0A-D5CA-40CC-9E71-4816AA5E2D98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuonSenDaShop.Application", "VuonSenDaShop.Application\VuonSenDaShop.Application.csproj", "{A349BF55-1248-497C-835B-347EC95F9334}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +24,14 @@ Global
 		{C79E6A14-3FE8-466D-9DA8-89F2059D559B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C79E6A14-3FE8-466D-9DA8-89F2059D559B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C79E6A14-3FE8-466D-9DA8-89F2059D559B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19AB3C0A-D5CA-40CC-9E71-4816AA5E2D98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19AB3C0A-D5CA-40CC-9E71-4816AA5E2D98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19AB3C0A-D5CA-40CC-9E71-4816AA5E2D98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19AB3C0A-D5CA-40CC-9E71-4816AA5E2D98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A349BF55-1248-497C-835B-347EC95F9334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A349BF55-1248-497C-835B-347EC95F9334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A349BF55-1248-497C-835B-347EC95F9334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A349BF55-1248-497C-835B-347EC95F9334}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
