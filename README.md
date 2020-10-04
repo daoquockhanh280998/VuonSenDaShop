@@ -40,3 +40,11 @@
 	#Cấu hình entity với Fluent API | Configure entity with Fluent API
 	-https://www.learnentityframeworkcore.com/configuration/fluent-api
 	-https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key
+
+#9 Fluent API
+	-SetBasePath: cài đặt thêm
+	-Microsoft.Extensions.Configuration.FileExtensions
+	-AddJsonFile:
+	-Microsoft.Extensions.Configuration.Json
+	-cấu hình connectionString xog chọn Tools trên thanh công cụ trên visual -> Nuget Package -> Package Manager Console -> chọn project là data và gõ: Add-Miration Initial(tên tùy chọn) enter
+		-> tiếp theo ta  gõ update-database
