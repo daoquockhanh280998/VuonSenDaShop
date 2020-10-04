@@ -11,4 +11,7 @@
 	-Mô hình N layer(gồm 3 tầng data, business, prenstation) theo hướng data driven design tức là thiết kế theo hướng dữ liệu như bảng gì data như thế nào
 	-Mô hình DDD (domain driven design) mô hình này hướng theo khi nghiệp vụ phức tạp, theo entity 
 # 6/ Tiếp Đến Ta tạo Class Libary cho Các Tầng (Data,Application) lưu ý điều tạo trên nhánh feature và tất cả phải cùng phiên bản
+# cấu hình thuộc tính kiêu dữ liệu cho Entities (configuration entites)
+	+Dùng Attribute
+	+Fluet API
 
