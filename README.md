@@ -32,3 +32,11 @@
 		+CategoriesTransactions
 	- User gồm id,username,password,Phone,email,LastLoginDate
 # 8/ tạo Entity Class và cài đặt EF core
+	#Install Packages
+	- Microsoft.EntityFrameworkCore.SQLServer
+	- Microsoft.EntityFrameworkCore.Tools
+	- Microsoft.EntityFrameworkCore.Design
+
+	#Cấu hình entity với Fluent API | Configure entity with Fluent API
+	-https://www.learnentityframeworkcore.com/configuration/fluent-api
+	-https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key
