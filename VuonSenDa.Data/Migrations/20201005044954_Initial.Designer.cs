@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VuonSenDaShop.Data.EF;
 
 namespace VuonSenDaShop.Data.Migrations
 {
     [DbContext(typeof(VuonSenDaShopDbContext))]
-    partial class VuonSenDaShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201005044954_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,7 +98,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 5, 15, 20, 4, 304, DateTimeKind.Local).AddTicks(3259));
+                        .HasDefaultValue(new DateTime(2020, 10, 5, 11, 49, 54, 139, DateTimeKind.Local).AddTicks(9288));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -599,7 +601,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 5, 15, 20, 4, 300, DateTimeKind.Local).AddTicks(8682));
+                        .HasDefaultValue(new DateTime(2020, 10, 5, 11, 49, 54, 135, DateTimeKind.Local).AddTicks(9755));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -647,7 +649,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 5, 15, 20, 4, 313, DateTimeKind.Local).AddTicks(5987));
+                        .HasDefaultValue(new DateTime(2020, 10, 5, 11, 49, 54, 150, DateTimeKind.Local).AddTicks(4788));
 
                     b.Property<string>("PictureName")
                         .IsRequired()

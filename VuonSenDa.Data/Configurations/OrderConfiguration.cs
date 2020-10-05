@@ -14,8 +14,8 @@ namespace VuonSenDaShop.Data.Configurations
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             builder.ToTable("Orders");
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.HasKey(x => x.OrderId);
+            builder.Property(x => x.OrderId).UseIdentityColumn();
             builder.Property(x => x.OrderDate).HasDefaultValue(DateTime.Now);
             builder.Property(x => x.ShipEmail).IsRequired().IsUnicode(false).HasMaxLength(50);
 

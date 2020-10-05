@@ -14,8 +14,8 @@ namespace VuonSenDaShop.Data.Configurations
         public void Configure(EntityTypeBuilder<Transaction> builder)
         {
             builder.ToTable("Transaction");
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.HasKey(x => x.TransactionId);
+            builder.Property(x => x.TransactionId).UseIdentityColumn();
         }
     }
 }

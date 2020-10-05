@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using VuonSenDaShop.Data.Configurations;
+using VuonSenDaShop.Data.Configurations.Translation;
 using VuonSenDaShop.Data.Entities;
 
 namespace VuonSenDaShop.Data.EF
@@ -25,7 +26,6 @@ namespace VuonSenDaShop.Data.EF
             modelBuilder.ApplyConfiguration(new ArticleMainCategoryConfiguration());
 
             modelBuilder.ApplyConfiguration(new CartConfiguration());
-            modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new ClientAccountConfiguration());
             modelBuilder.ApplyConfiguration(new ContactConfiguration());
             modelBuilder.ApplyConfiguration(new LanguageConfiguration());
@@ -42,7 +42,10 @@ namespace VuonSenDaShop.Data.EF
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
-            #region Relationships
+            #region TranSlation
+            modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductCategoryTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductMainCategoryTranslationConfiguration());
             #endregion
         }
         public DbSet<AdminAccount> AdminAccounts { get; set; }
@@ -55,7 +58,6 @@ namespace VuonSenDaShop.Data.EF
         public DbSet<ArticleMainCategory> ArticleMainCategories { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<CategoryTranslation> CategoryTranslations { get; set; }
         public DbSet<ClientAccount> Clients { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Language> Languages { get; set; }
@@ -66,6 +68,12 @@ namespace VuonSenDaShop.Data.EF
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductMainCategory> ProductMainCategories { get; set; }
+
+        public DbSet<ProductTranslation> ProductTranslations { get; set; }
+        public DbSet<ProductCategoryTranslation> ProductCategorieTranslations { get; set; }
+        public DbSet<ProductMainCategoryTranslation> ProductMainCategoryTranslations { get; set; }
+
+
 
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

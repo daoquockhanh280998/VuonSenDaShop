@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopOnlineGamingPC.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using VuonSenDaShop.Data.Enums;
@@ -11,6 +12,7 @@ namespace VuonSenDaShop.Data.Entities
         public string ProductName { get; set; }
         public decimal Price { get; set; }
         public decimal OriginalPrice { get; set; }
+        public string Details { set; get; }
         public string Dercription { get; set; }
         public string Avatar { get; set; }
         public string Thumb { get; set; }
@@ -23,5 +25,8 @@ namespace VuonSenDaShop.Data.Entities
         public string CreateBy { get; set; }
         public int ProductCategoryId { get; set; }
         public ProductCategory ProductCategory { get; set; }
+        public List<OrderDetail>  OrderDetails { get; set; }
+        public List<Cart> Carts { get; set; }
+        public List<ProductTranslation> ProductTranslations { get; set; }
     }
 }
