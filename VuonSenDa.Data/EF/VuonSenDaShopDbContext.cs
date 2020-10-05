@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ShopOnlineGamingPC.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,10 +7,11 @@ using System.Text;
 using VuonSenDaShop.Data.Configurations;
 using VuonSenDaShop.Data.Configurations.Translation;
 using VuonSenDaShop.Data.Entities;
+using VuonSenDaShop.Data.Extensions;
 
 namespace VuonSenDaShop.Data.EF
 {
-    public class VuonSenDaShopDbContext : DbContext
+    public class VuonSenDaShopDbContext : IdentityDbContext
     {
         public VuonSenDaShopDbContext( DbContextOptions options) : base(options)
         {
@@ -46,6 +48,11 @@ namespace VuonSenDaShop.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new ProductCategoryTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new ProductMainCategoryTranslationConfiguration());
+            #endregion
+
+
+            #region Data seeding
+            modelBuilder.Seed();
             #endregion
         }
         public DbSet<AdminAccount> AdminAccounts { get; set; }
