@@ -7,7 +7,7 @@ namespace ShopOnlineGamingPC.Data.Entities
 {
     public class Transaction
     {
-        public int Id { set; get; }
+        public int TransactionId { set; get; }
         public DateTime TransactionDate { set; get; }
         public string ExternalTransactionId { set; get; }
         public decimal Amount { set; get; }

@@ -25,6 +25,9 @@ namespace VuonSenDaShop.Data.Configurations
             builder.Property(x => x.Position).HasDefaultValue(1);
             builder.Property(x => x.Status).HasDefaultValue(Status.Active);
             builder.Property(x => x.CreateBy).HasMaxLength(255).IsRequired(false);
+
+            builder.HasOne(x => x.ArticleCategory).WithMany(x => x.Articles)
+                .HasForeignKey(x => x.ArticleCategoryId);
         }
     }
 }

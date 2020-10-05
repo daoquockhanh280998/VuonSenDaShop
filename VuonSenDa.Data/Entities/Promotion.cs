@@ -8,7 +8,7 @@ namespace ShopOnlineGamingPC.Data.Entities
 {
     public class Promotion
     {
-        public int Id { set; get; }
+        public int PromotionId { set; get; }
         public DateTime FromDate { set; get; }
         public DateTime ToDate { set; get; }
         public bool ApplyForAll { set; get; }

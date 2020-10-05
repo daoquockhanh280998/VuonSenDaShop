@@ -8,7 +8,7 @@ namespace VuonSenDaShop.Data.Entities
 {
     public class AdminAccount
     {
-        public int Id { get; set; }
+        public int AdminAccountId { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
@@ -21,6 +21,9 @@ namespace VuonSenDaShop.Data.Entities
         public Status Status { get; set; }
         public DateTime? DateCreate { get; set; }
         public string CreateBy { get; set; }
+
+        public int AdminAccountCategoryId { get; set; }
+        public AdminAccountCategory AdminAccountCategory { get; set; }
 
     }
 }

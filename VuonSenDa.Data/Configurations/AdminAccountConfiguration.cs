@@ -14,8 +14,8 @@ namespace VuonSenDaShop.Data.Configurations
         public void Configure(EntityTypeBuilder<AdminAccount> builder)
         {
             builder.ToTable("AdminAccounts");
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.HasKey(x => x.AdminAccountId);
+            builder.Property(x => x.AdminAccountId).UseIdentityColumn();
             builder.Property(x => x.Username).HasMaxLength(255).IsUnicode(false).IsRequired();
             builder.Property(x => x.Password).HasMaxLength(255).IsUnicode(false).IsRequired();
             builder.Property(x => x.Email).HasMaxLength(255).IsUnicode(false).IsRequired();
@@ -26,6 +26,11 @@ namespace VuonSenDaShop.Data.Configurations
             builder.Property(x => x.Gender).HasDefaultValue(Gender.Male);
             builder.Property(x => x.Status).HasDefaultValue(Status.Active);
             builder.Property(x => x.CreateBy).HasMaxLength(255).IsRequired(false);
+
+            builder.HasOne(x => x.AdminAccountCategory).WithMany(x => x.AdminAccounts)
+                  .HasForeignKey(x => x.AdminAccountCategoryId);
+
+
         }
     }
 }

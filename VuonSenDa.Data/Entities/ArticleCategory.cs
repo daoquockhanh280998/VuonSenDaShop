@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopOnlineGamingPC.Data.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using VuonSenDaShop.Data.Enums;
@@ -17,5 +18,11 @@ namespace VuonSenDaShop.Data.Entities
         public DateTime? DateCreate { get; set; }
         public string CreateBy { get; set; }
 
+        public int ArticleMainCategoryId { get; set; }
+
+        public ArticleMainCategory ArticleMainCategory { get; set; }
+
+        public List<Article> Articles { get; set; }
+       
     }
 }

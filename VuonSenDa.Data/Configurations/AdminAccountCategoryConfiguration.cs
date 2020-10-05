@@ -14,13 +14,15 @@ namespace VuonSenDaShop.Data.Configurations
         public void Configure(EntityTypeBuilder<AdminAccountCategory> builder)
         {
             builder.ToTable("AdminAccountCategorys");
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).UseIdentityColumn();
+            builder.HasKey(x => x.AdminAccountCategoryId);
+            builder.Property(x => x.AdminAccountCategoryId).UseIdentityColumn();
             builder.Property(x => x.Title).HasMaxLength(255).IsUnicode(false).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(4000).IsRequired(false);
             builder.Property(x => x.Avatar).HasMaxLength(4000).IsRequired(false);
             builder.Property(x => x.Thumb).HasMaxLength(4000).IsRequired(false);
             builder.Property(x => x.Status).HasDefaultValue(Status.Active);
+
+
         }
     }
 }

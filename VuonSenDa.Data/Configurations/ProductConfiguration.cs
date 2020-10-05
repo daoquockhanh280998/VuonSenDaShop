@@ -19,6 +19,7 @@ namespace VuonSenDaShop.Data.Configurations
             builder.Property(x => x.ProductName).HasMaxLength(500).IsRequired();
             builder.Property(x => x.Avatar).HasMaxLength(4000).IsRequired();
             builder.Property(x => x.Thumb).HasMaxLength(4000).IsRequired(false);
+            builder.Property(x => x.Details).HasMaxLength(4000).IsRequired(false);
             builder.Property(x => x.Dercription).HasMaxLength(4000).IsRequired(false);
             builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.OriginalPrice).IsRequired();

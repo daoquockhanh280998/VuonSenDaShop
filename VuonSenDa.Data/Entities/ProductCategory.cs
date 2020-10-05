@@ -20,5 +20,7 @@ namespace VuonSenDaShop.Data.Entities
         public ProductMainCategory ProductMainCategory { get; set; }
 
         public List<Product> Products { get; set; }
+
+        public List<ProductCategoryTranslation> ProductCategoryTranslations { get; set; }
     }
 }

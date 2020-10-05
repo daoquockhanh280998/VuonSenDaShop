@@ -19,5 +19,8 @@ namespace VuonSenDaShop.Data.Entities
         public DateTime? DateCreate { get; set; }
         public string CreateBy { get; set; }
 
+        public int ArticleCategoryId { get; set; }
+
+        public ArticleCategory  ArticleCategory { get; set; }
     }
 }
