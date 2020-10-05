@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VuonSenDaShop.Data.EF;
 
 namespace VuonSenDaShop.Data.Migrations
 {
     [DbContext(typeof(VuonSenDaShopDbContext))]
-    partial class VuonSenDaShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201005125116_seedingdataTest2")]
+    partial class seedingdataTest2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

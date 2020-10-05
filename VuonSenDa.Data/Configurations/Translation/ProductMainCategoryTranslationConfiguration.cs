@@ -18,7 +18,7 @@ namespace VuonSenDaShop.Data.Configurations.Translation
             builder.Property(x => x.ProductMainCategoryTranslationId).UseIdentityColumn();
 
 
-            builder.Property(x => x.ProductMainCategoryName).IsRequired().HasMaxLength(200);
+            builder.Property(x => x.ProductMainCategoryTranslationName).IsRequired().HasMaxLength(200);
 
             builder.Property(x => x.SeoAlias).IsRequired().HasMaxLength(200);
 

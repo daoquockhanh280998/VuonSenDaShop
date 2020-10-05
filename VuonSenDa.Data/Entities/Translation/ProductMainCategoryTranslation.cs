@@ -9,9 +9,7 @@ namespace VuonSenDaShop.Data.Entities
     public class ProductMainCategoryTranslation
     {
         public int ProductMainCategoryTranslationId { get; set; }
-        public string ProductMainCategoryName { get; set; }
-        public string Dercription { get; set; }
-        public string Details { set; get; }
+        public string ProductMainCategoryTranslationName { get; set; }
         public string SeoDescription { set; get; }
         public string SeoTitle { set; get; }
         public string SeoAlias { get; set; }
