@@ -38,6 +38,119 @@ namespace VuonSenDaShop.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<Guid>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppRoleClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppRoles",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    NormalizedName = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<Guid>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserClaims", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserLogins",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: true),
+                    ProviderKey = table.Column<string>(nullable: true),
+                    ProviderDisplayName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserLogins", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    RoleId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserRoles", x => new { x.UserId, x.RoleId });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUsers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    NormalizedUserName = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    NormalizedEmail = table.Column<string>(nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    FistName = table.Column<string>(maxLength: 200, nullable: false),
+                    LastName = table.Column<string>(maxLength: 200, nullable: false),
+                    DOB = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppUserTokens", x => x.UserId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ArticleMainCategories",
                 columns: table => new
                 {
@@ -92,7 +205,7 @@ namespace VuonSenDaShop.Data.Migrations
                     Content = table.Column<string>(maxLength: 4000, nullable: false),
                     PhoneNumber = table.Column<int>(maxLength: 50, nullable: false),
                     Status = table.Column<int>(nullable: false, defaultValue: 1),
-                    DateCreate = table.Column<DateTime>(nullable: true, defaultValue: new DateTime(2020, 10, 5, 11, 49, 54, 135, DateTimeKind.Local).AddTicks(9755))
+                    DateCreate = table.Column<DateTime>(nullable: true, defaultValue: new DateTime(2020, 10, 6, 10, 32, 29, 823, DateTimeKind.Local).AddTicks(8126))
                 },
                 constraints: table =>
                 {
@@ -113,25 +226,6 @@ namespace VuonSenDaShop.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
-                {
-                    OrderId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 5, 11, 49, 54, 139, DateTimeKind.Local).AddTicks(9288)),
-                    UserId = table.Column<Guid>(nullable: false),
-                    ShipName = table.Column<string>(maxLength: 200, nullable: false),
-                    ShipAddress = table.Column<string>(maxLength: 200, nullable: false),
-                    ShipEmail = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
-                    ShipPhoneNumber = table.Column<string>(maxLength: 200, nullable: false),
-                    Status = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Orders", x => x.OrderId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Pictures",
                 columns: table => new
                 {
@@ -143,7 +237,7 @@ namespace VuonSenDaShop.Data.Migrations
                     Thumb = table.Column<string>(maxLength: 4000, nullable: true),
                     Position = table.Column<int>(nullable: false),
                     Status = table.Column<int>(nullable: false, defaultValue: 1),
-                    DateCreate = table.Column<DateTime>(nullable: true, defaultValue: new DateTime(2020, 10, 5, 11, 49, 54, 150, DateTimeKind.Local).AddTicks(4788)),
+                    DateCreate = table.Column<DateTime>(nullable: true, defaultValue: new DateTime(2020, 10, 6, 10, 32, 29, 834, DateTimeKind.Local).AddTicks(1575)),
                     CreateBy = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
@@ -193,26 +287,6 @@ namespace VuonSenDaShop.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Transaction",
-                columns: table => new
-                {
-                    TransactionId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    TransactionDate = table.Column<DateTime>(nullable: false),
-                    ExternalTransactionId = table.Column<string>(nullable: true),
-                    Amount = table.Column<decimal>(nullable: false),
-                    Fee = table.Column<decimal>(nullable: false),
-                    Result = table.Column<string>(nullable: true),
-                    Message = table.Column<string>(nullable: true),
-                    Status = table.Column<int>(nullable: false),
-                    Provider = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Transaction", x => x.TransactionId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AdminAccounts",
                 columns: table => new
                 {
@@ -240,6 +314,58 @@ namespace VuonSenDaShop.Data.Migrations
                         column: x => x.AdminAccountCategoryId,
                         principalTable: "AdminAccountCategorys",
                         principalColumn: "AdminAccountCategoryId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderDate = table.Column<DateTime>(nullable: false, defaultValue: new DateTime(2020, 10, 6, 10, 32, 29, 828, DateTimeKind.Local).AddTicks(310)),
+                    UserId = table.Column<Guid>(nullable: false),
+                    ShipName = table.Column<string>(maxLength: 200, nullable: false),
+                    ShipAddress = table.Column<string>(maxLength: 200, nullable: false),
+                    ShipEmail = table.Column<string>(unicode: false, maxLength: 50, nullable: false),
+                    ShipPhoneNumber = table.Column<string>(maxLength: 200, nullable: false),
+                    Status = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
+                    table.ForeignKey(
+                        name: "FK_Orders_AppUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Transaction",
+                columns: table => new
+                {
+                    TransactionId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TransactionDate = table.Column<DateTime>(nullable: false),
+                    ExternalTransactionId = table.Column<string>(nullable: true),
+                    Amount = table.Column<decimal>(nullable: false),
+                    Fee = table.Column<decimal>(nullable: false),
+                    Result = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    Provider = table.Column<string>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Transaction", x => x.TransactionId);
+                    table.ForeignKey(
+                        name: "FK_Transaction_AppUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -303,9 +429,7 @@ namespace VuonSenDaShop.Data.Migrations
                 {
                     ProductMainCategoryTranslationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductMainCategoryName = table.Column<string>(maxLength: 200, nullable: false),
-                    Dercription = table.Column<string>(nullable: true),
-                    Details = table.Column<string>(nullable: true),
+                    ProductMainCategoryTranslationName = table.Column<string>(maxLength: 200, nullable: false),
                     SeoDescription = table.Column<string>(maxLength: 500, nullable: true),
                     SeoTitle = table.Column<string>(maxLength: 200, nullable: true),
                     SeoAlias = table.Column<string>(maxLength: 200, nullable: false),
@@ -364,7 +488,7 @@ namespace VuonSenDaShop.Data.Migrations
                 {
                     ProductCategoryTranslationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductCategoryName = table.Column<string>(maxLength: 200, nullable: false),
+                    ProductCategoryTranslationName = table.Column<string>(maxLength: 200, nullable: false),
                     Dercription = table.Column<string>(nullable: true),
                     Details = table.Column<string>(nullable: true),
                     SeoDescription = table.Column<string>(maxLength: 500, nullable: true),
@@ -444,6 +568,12 @@ namespace VuonSenDaShop.Data.Migrations
                         principalTable: "Products",
                         principalColumn: "ProductId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Carts_AppUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -478,7 +608,7 @@ namespace VuonSenDaShop.Data.Migrations
                 {
                     ProductTranslationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(maxLength: 200, nullable: false),
+                    ProductTranslationName = table.Column<string>(maxLength: 200, nullable: false),
                     Dercription = table.Column<string>(nullable: true),
                     Details = table.Column<string>(nullable: true),
                     SeoDescription = table.Column<string>(maxLength: 500, nullable: true),
@@ -504,6 +634,91 @@ namespace VuonSenDaShop.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AppConfigs",
+                columns: new[] { "Key", "Value" },
+                values: new object[,]
+                {
+                    { "HomeTitle", "This is home page of Vuon Sen Da" },
+                    { "HomeKeyword", "This is keyword of Vuon Sen Da" },
+                    { "HomeDescription", "This is description of Vuon Sen Da" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Languages",
+                columns: new[] { "LanguageId", "IsDefault", "Name" },
+                values: new object[,]
+                {
+                    { "vi-VN", true, "Tiếng Việt" },
+                    { "en-US", false, "English" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductMainCategories",
+                columns: new[] { "ProductMainCategoryId", "Avatar", "CreateBy", "DateCreate", "Dercription", "Position", "ProductMainCategoryName", "Status", "Thumb" },
+                values: new object[,]
+                {
+                    { 1, "hinh", "Admin", null, "Sen đá bịch/chậu nhựa", 0, "Sen đá bịch/chậu nhựa", 1, null },
+                    { 2, "hinh", "Admin", null, "Xương rồng", 0, "Xương rồng", 1, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductCategories",
+                columns: new[] { "ProductCategoryId", "Avatar", "CreateBy", "DateCreate", "Dercription", "Position", "ProductCategoryName", "ProductMainCategoryId", "Status", "Thumb" },
+                values: new object[,]
+                {
+                    { 1, "hinh", "Admin", null, "Sen đá cỡ nhỏ", 0, "Sen đá cỡ nhỏ", 1, 1, null },
+                    { 2, "hinh", "Admin", null, "Sen đá cỡ Lớn", 0, "Sen đá cỡ Lớn", 1, 1, null },
+                    { 3, "hinh", "Admin", null, "Xương Rồng", 0, "Xương Rồng", 2, 1, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductMainCategoryTranslations",
+                columns: new[] { "ProductMainCategoryTranslationId", "LanguageId", "ProductMainCategoryId", "ProductMainCategoryTranslationName", "SeoAlias", "SeoDescription", "SeoTitle" },
+                values: new object[,]
+                {
+                    { 1, "vi-VN", 1, "Sen đá bịch/chậu nhựa", "sen-da-bich-chau-nhua", "Sen đá bịch/chậu nhựa", "Sen đá bịch/chậu nhựa" },
+                    { 2, "en-US", 1, "Stone Lotus Plastic Pots", "Stone-Lotus-Plastic-Pots", "Stone-Lotus-Plastic-Pots", "Stone-Lotus-Plastic-Pots" },
+                    { 3, "vi-VN", 2, "Xương rồng", "Xuong-Rong", "Xương rồng", "Xương rồng" },
+                    { 4, "en-US", 2, "Cactus", "Cactus", "Cactus", "Cactus" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductCategoryTranslations",
+                columns: new[] { "ProductCategoryTranslationId", "Dercription", "Details", "LanguageId", "ProductCategoryId", "ProductCategoryTranslationName", "SeoAlias", "SeoDescription", "SeoTitle" },
+                values: new object[,]
+                {
+                    { 1, null, null, "vi-VN", 1, "Sen đá cỡ nhỏ", "sen-da-co-nho", "Sen đá cỡ nhỏ", "Sen đá cỡ nhỏ" },
+                    { 2, null, null, "en-US", 1, "Small Stone Lotus", "Small-Stone-Lotus", "Small Stone Lotus", "Small Stone Lotus" },
+                    { 3, null, null, "vi-VN", 2, "Sen đá cỡ Lớn", "Sen-Da-Co-Lon", "Sen đá cỡ Lớn", "Sen đá cỡ Lớn" },
+                    { 4, null, null, "en-US", 2, "Big Stone Lotus", "Big-Stone-Lotus", "Big Stone Lotus", "Big Stone Lotus" },
+                    { 5, null, null, "vi-VN", 3, "Xương Rồng", "Xuong-Rong", "Sen đá cỡ Lớn", "Sen đá cỡ Lớn" },
+                    { 6, null, null, "en-US", 3, "Cactus", "Cactus", "Cactus", "Cactus" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Products",
+                columns: new[] { "ProductId", "Avatar", "CreateBy", "DateCreate", "Dercription", "Details", "OriginalPrice", "Position", "Price", "ProductCategoryId", "ProductName", "Status", "Thumb", "ViewCount", "ViewTime" },
+                values: new object[,]
+                {
+                    { 1, "hinh", "Admin", null, "Sen Dù Hồng 3-5cm (Chậu Nhựa)", "Sen Dù Hồng 3-5cm (Chậu Nhựa)", 25000m, 0, 20000m, 1, "Sen Dù Hồng 3-5cm (Chậu Nhựa)", 1, null, 0, 0 },
+                    { 2, "hinh", "Admin", null, "Sen Dù Hồng 5-10cm ", "Sen Dù Hồng 5-10cm ", 45000m, 0, 40000m, 2, "Sen Dù Hồng 5-10cm ", 1, null, 0, 0 },
+                    { 3, "hinh", "Admin", null, "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ", "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ", 55000m, 0, 50000m, 3, "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ", 1, null, 0, 0 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductTranslations",
+                columns: new[] { "ProductTranslationId", "Dercription", "Details", "LanguageId", "ProductId", "ProductTranslationName", "SeoAlias", "SeoDescription", "SeoTitle" },
+                values: new object[,]
+                {
+                    { 1, null, null, "vi-VN", 1, "Sen Dù Hồng 3-5cm (Chậu Nhựa)", "sen-du-hong-3-5cm", "Sen Dù Hồng 3-5cm (Chậu Nhựa)", "Sen Dù Hồng 3-5cm (Chậu Nhựa)" },
+                    { 2, null, null, "en-US", 1, "Stone Lotus Du Hong 3-5cm (Plastic pots)", "Stone-Lotus-Du-Hong-3-5cm-(Plastic-pots)", "Stone Lotus Du Hong 3-5cm (Plastic pots)", "Stone Lotus Du Hong 3-5cm (Plastic pots)" },
+                    { 3, null, null, "vi-VN", 2, "Sen Dù Hồng 5-10cm ", "sen-du-hong-3-5cm", "Sen Dù Hồng 3-5cm ", "Sen Dù Hồng 3-5cm " },
+                    { 4, null, null, "en-US", 2, "Stone Lotus Du Hong 5-10cm ", "Stone-Lotus-Du-Hong-5-10cm", "Stone Lotus Du Hong 5-10cm", "Stone Lotus Du Hong 5-10cm" },
+                    { 5, null, null, "vi-VN", 3, "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ", "xuong-rong-than-long", "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ", "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) " },
+                    { 6, null, null, "en-US", 3, "Dragon Spirit Cactus 7-9cm (Plastic Pots)", "Dragon-Spirit-Cactus-7-9cm-Plastic Pots", "Dragon Spirit Cactus 7-9cm (Plastic Pots)", "Dragon Spirit Cactus 7-9cm (Plastic Pots)" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AdminAccounts_AdminAccountCategoryId",
                 table: "AdminAccounts",
@@ -525,9 +740,19 @@ namespace VuonSenDaShop.Data.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Carts_UserId",
+                table: "Carts",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_ProductId",
                 table: "OrderDetails",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_UserId",
+                table: "Orders",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductCategories_ProductMainCategoryId",
@@ -568,6 +793,11 @@ namespace VuonSenDaShop.Data.Migrations
                 name: "IX_ProductTranslations_ProductId",
                 table: "ProductTranslations",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Transaction_UserId",
+                table: "Transaction",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -577,6 +807,24 @@ namespace VuonSenDaShop.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AppConfigs");
+
+            migrationBuilder.DropTable(
+                name: "AppRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AppRoles");
+
+            migrationBuilder.DropTable(
+                name: "AppUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AppUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AppUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AppUserTokens");
 
             migrationBuilder.DropTable(
                 name: "Articles");
@@ -628,6 +876,9 @@ namespace VuonSenDaShop.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "ArticleMainCategories");
+
+            migrationBuilder.DropTable(
+                name: "AppUsers");
 
             migrationBuilder.DropTable(
                 name: "ProductCategories");

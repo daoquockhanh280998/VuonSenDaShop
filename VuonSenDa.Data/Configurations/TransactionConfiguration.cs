@@ -16,6 +16,9 @@ namespace VuonSenDaShop.Data.Configurations
             builder.ToTable("Transaction");
             builder.HasKey(x => x.TransactionId);
             builder.Property(x => x.TransactionId).UseIdentityColumn();
+
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Transactions).HasForeignKey(x => x.UserId);
+
         }
     }
 }

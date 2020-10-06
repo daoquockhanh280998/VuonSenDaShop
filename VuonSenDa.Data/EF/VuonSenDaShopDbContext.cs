@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ShopOnlineGamingPC.Data.Entities;
 using System;
@@ -11,9 +12,9 @@ using VuonSenDaShop.Data.Extensions;
 
 namespace VuonSenDaShop.Data.EF
 {
-    public class VuonSenDaShopDbContext : IdentityDbContext
+    public class VuonSenDaShopDbContext : IdentityDbContext<AppUser, AppRole, Guid>
     {
-        public VuonSenDaShopDbContext( DbContextOptions options) : base(options)
+        public VuonSenDaShopDbContext(DbContextOptions options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -50,10 +51,18 @@ namespace VuonSenDaShop.Data.EF
             modelBuilder.ApplyConfiguration(new ProductMainCategoryTranslationConfiguration());
             #endregion
 
-
             #region Data seeding
             modelBuilder.Seed();
             #endregion
+
+            modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new AppUserConfiguration());
+
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("AppUserClaims");
+            modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("AppRoleClaims");
+            modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("AppUserRoles").HasKey(x => new { x.UserId, x.RoleId });
+            modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("AppUserLogins").HasKey(x => x.UserId);
+            modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("AppUserTokens").HasKey(x => x.UserId);
         }
         public DbSet<AdminAccount> AdminAccounts { get; set; }
         public DbSet<AdminAccountCategory> AdminAccountCategories { get; set; }
