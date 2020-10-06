@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using ShopOnlineGamingPC.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace VuonSenDaShop.Data.Extensions
                        Status = Status.Active,
                        CreateBy = "Admin"
                    }
-                   
+
                    );
             #endregion
 
@@ -62,42 +63,42 @@ namespace VuonSenDaShop.Data.Extensions
                    {
                        ProductMainCategoryTranslationId = 1,
                        ProductMainCategoryTranslationName = "Sen đá bịch/chậu nhựa",
-                       LanguageId= "vi-VN",
+                       LanguageId = "vi-VN",
                        SeoAlias = "sen-da-bich-chau-nhua",
                        SeoDescription = "Sen đá bịch/chậu nhựa",
                        SeoTitle = "Sen đá bịch/chậu nhựa",
-                       ProductMainCategoryId=1,
+                       ProductMainCategoryId = 1,
                    },
                    new ProductMainCategoryTranslation()
-                    {
-                        ProductMainCategoryTranslationId = 2,
-                        ProductMainCategoryTranslationName = "Stone Lotus Plastic Pots",
-                        LanguageId = "en-US",
-                        SeoAlias = "Stone-Lotus-Plastic-Pots",
-                        SeoDescription = "Stone-Lotus-Plastic-Pots",
-                        SeoTitle = "Stone-Lotus-Plastic-Pots",
-                        ProductMainCategoryId = 1,
-                    },
+                   {
+                       ProductMainCategoryTranslationId = 2,
+                       ProductMainCategoryTranslationName = "Stone Lotus Plastic Pots",
+                       LanguageId = "en-US",
+                       SeoAlias = "Stone-Lotus-Plastic-Pots",
+                       SeoDescription = "Stone-Lotus-Plastic-Pots",
+                       SeoTitle = "Stone-Lotus-Plastic-Pots",
+                       ProductMainCategoryId = 1,
+                   },
                    new ProductMainCategoryTranslation()
-                     {
-                         ProductMainCategoryTranslationId = 3,
-                         ProductMainCategoryTranslationName = "Xương rồng",
-                         LanguageId = "vi-VN",
-                         SeoAlias = "Xuong-Rong",
-                         SeoDescription = "Xương rồng",
-                         SeoTitle = "Xương rồng",
-                         ProductMainCategoryId = 2,
-                     },
+                   {
+                       ProductMainCategoryTranslationId = 3,
+                       ProductMainCategoryTranslationName = "Xương rồng",
+                       LanguageId = "vi-VN",
+                       SeoAlias = "Xuong-Rong",
+                       SeoDescription = "Xương rồng",
+                       SeoTitle = "Xương rồng",
+                       ProductMainCategoryId = 2,
+                   },
                    new ProductMainCategoryTranslation()
-                    {
-                        ProductMainCategoryTranslationId = 4,
-                        ProductMainCategoryTranslationName = "Cactus",
-                        LanguageId = "en-US",
-                        SeoAlias = "Cactus",
-                        SeoDescription = "Cactus",
-                        SeoTitle = "Cactus",
-                        ProductMainCategoryId = 2,
-                    }
+                   {
+                       ProductMainCategoryTranslationId = 4,
+                       ProductMainCategoryTranslationName = "Cactus",
+                       LanguageId = "en-US",
+                       SeoAlias = "Cactus",
+                       SeoDescription = "Cactus",
+                       SeoTitle = "Cactus",
+                       ProductMainCategoryId = 2,
+                   }
 
                    );
             #endregion
@@ -141,7 +142,7 @@ namespace VuonSenDaShop.Data.Extensions
                          CreateBy = "Admin",
                          ProductMainCategoryId = 2
                      }
-                   ) ;
+                   );
             #endregion
 
             #region Entity<ProductCategoryTranslation>
@@ -265,7 +266,7 @@ namespace VuonSenDaShop.Data.Extensions
                           CreateBy = "Admin",
                           ProductCategoryId = 3
                       }
-                   ) ;
+                   );
             #endregion
 
             #region Entity<ProductTranslation>
@@ -333,7 +334,42 @@ namespace VuonSenDaShop.Data.Extensions
                    );
             #endregion
 
-            
+            #region ADMIN_ID
+            // any guid
+            var adminID = new Guid("08F06AC0-5706-465E-AD7B-5BFA88117B00");
+            var roleID = new Guid("7ED48C67-F62F-43DF-AD4B-1FF27E5DAF21");
+            modelBuilder.Entity<AppRole>().HasData(new AppRole
+            {
+                Id = roleID,
+                Name = "admin",
+                NormalizedName = "admin",
+                Description = "Administrator role"
+            });
+
+            var hasher = new PasswordHasher<IdentityUser>();
+            modelBuilder.Entity<AppUser>().HasData(new AppUser
+            {
+                Id = adminID,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "daoquockhanh280998@gmail.com",
+                NormalizedEmail = "daoquockhanh280998@gmail.co",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "12345678"),
+                SecurityStamp = string.Empty,
+                FistName = "Khánh",
+                LastName="Đào",
+                DOB= new DateTime(2020,5,28)
+            }) ;
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                RoleId = roleID,
+                UserId = adminID
+            });
+            #endregion
+
+
 
         }
     }
