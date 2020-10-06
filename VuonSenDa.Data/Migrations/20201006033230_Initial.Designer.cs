@@ -10,8 +10,8 @@ using VuonSenDaShop.Data.EF;
 namespace VuonSenDaShop.Data.Migrations
 {
     [DbContext(typeof(VuonSenDaShopDbContext))]
-    [Migration("20201005082004_DeleteAdminAccountToSql")]
-    partial class DeleteAdminAccountToSql
+    [Migration("20201006033230_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,101 @@ namespace VuonSenDaShop.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoleClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUserClaims");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserLogins");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.ToTable("AppUserRoles");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId");
+
+                    b.ToTable("AppUserTokens");
+                });
 
             modelBuilder.Entity("ShopOnlineGamingPC.Data.Entities.AppConfig", b =>
                 {
@@ -33,6 +128,23 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasKey("Key");
 
                     b.ToTable("AppConfigs");
+
+                    b.HasData(
+                        new
+                        {
+                            Key = "HomeTitle",
+                            Value = "This is home page of Vuon Sen Da"
+                        },
+                        new
+                        {
+                            Key = "HomeKeyword",
+                            Value = "This is keyword of Vuon Sen Da"
+                        },
+                        new
+                        {
+                            Key = "HomeDescription",
+                            Value = "This is description of Vuon Sen Da"
+                        });
                 });
 
             modelBuilder.Entity("ShopOnlineGamingPC.Data.Entities.Cart", b =>
@@ -63,6 +175,8 @@ namespace VuonSenDaShop.Data.Migrations
 
                     b.HasIndex("ProductId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Carts");
                 });
 
@@ -84,6 +198,20 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasKey("LanguageId");
 
                     b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            LanguageId = "vi-VN",
+                            IsDefault = true,
+                            Name = "Tiếng Việt"
+                        },
+                        new
+                        {
+                            LanguageId = "en-US",
+                            IsDefault = false,
+                            Name = "English"
+                        });
                 });
 
             modelBuilder.Entity("ShopOnlineGamingPC.Data.Entities.Order", b =>
@@ -98,7 +226,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime>("OrderDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 5, 15, 20, 4, 304, DateTimeKind.Local).AddTicks(3259));
+                        .HasDefaultValue(new DateTime(2020, 10, 6, 10, 32, 29, 828, DateTimeKind.Local).AddTicks(310));
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -128,6 +256,8 @@ namespace VuonSenDaShop.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -228,7 +358,12 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("TransactionId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Transaction");
                 });
@@ -346,6 +481,97 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasKey("AdminAccountCategoryId");
 
                     b.ToTable("AdminAccountCategorys");
+                });
+
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.AppRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRoles");
+                });
+
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.AppUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("FistName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUsers");
                 });
 
             modelBuilder.Entity("VuonSenDaShop.Data.Entities.Article", b =>
@@ -601,7 +827,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 5, 15, 20, 4, 300, DateTimeKind.Local).AddTicks(8682));
+                        .HasDefaultValue(new DateTime(2020, 10, 6, 10, 32, 29, 823, DateTimeKind.Local).AddTicks(8126));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -649,7 +875,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 5, 15, 20, 4, 313, DateTimeKind.Local).AddTicks(5987));
+                        .HasDefaultValue(new DateTime(2020, 10, 6, 10, 32, 29, 834, DateTimeKind.Local).AddTicks(1575));
 
                     b.Property<string>("PictureName")
                         .IsRequired()
@@ -750,6 +976,59 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasIndex("ProductCategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            Avatar = "hinh",
+                            CreateBy = "Admin",
+                            Dercription = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
+                            Details = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
+                            OriginalPrice = 25000m,
+                            Position = 0,
+                            Price = 20000m,
+                            ProductCategoryId = 1,
+                            ProductName = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
+                            Status = 1,
+                            Stock = 0,
+                            ViewCount = 0,
+                            ViewTime = 0
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            Avatar = "hinh",
+                            CreateBy = "Admin",
+                            Dercription = "Sen Dù Hồng 5-10cm ",
+                            Details = "Sen Dù Hồng 5-10cm ",
+                            OriginalPrice = 45000m,
+                            Position = 0,
+                            Price = 40000m,
+                            ProductCategoryId = 2,
+                            ProductName = "Sen Dù Hồng 5-10cm ",
+                            Status = 1,
+                            Stock = 0,
+                            ViewCount = 0,
+                            ViewTime = 0
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            Avatar = "hinh",
+                            CreateBy = "Admin",
+                            Dercription = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
+                            Details = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
+                            OriginalPrice = 55000m,
+                            Position = 0,
+                            Price = 50000m,
+                            ProductCategoryId = 3,
+                            ProductName = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
+                            Status = 1,
+                            Stock = 0,
+                            ViewCount = 0,
+                            ViewTime = 0
+                        });
                 });
 
             modelBuilder.Entity("VuonSenDaShop.Data.Entities.ProductCategory", b =>
@@ -802,6 +1081,41 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasIndex("ProductMainCategoryId");
 
                     b.ToTable("ProductCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductCategoryId = 1,
+                            Avatar = "hinh",
+                            CreateBy = "Admin",
+                            Dercription = "Sen đá cỡ nhỏ",
+                            Position = 0,
+                            ProductCategoryName = "Sen đá cỡ nhỏ",
+                            ProductMainCategoryId = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            ProductCategoryId = 2,
+                            Avatar = "hinh",
+                            CreateBy = "Admin",
+                            Dercription = "Sen đá cỡ Lớn",
+                            Position = 0,
+                            ProductCategoryName = "Sen đá cỡ Lớn",
+                            ProductMainCategoryId = 1,
+                            Status = 1
+                        },
+                        new
+                        {
+                            ProductCategoryId = 3,
+                            Avatar = "hinh",
+                            CreateBy = "Admin",
+                            Dercription = "Xương Rồng",
+                            Position = 0,
+                            ProductCategoryName = "Xương Rồng",
+                            ProductMainCategoryId = 2,
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("VuonSenDaShop.Data.Entities.ProductCategoryTranslation", b =>
@@ -828,7 +1142,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductCategoryName")
+                    b.Property<string>("ProductCategoryTranslationName")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
@@ -853,6 +1167,68 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasIndex("ProductCategoryId");
 
                     b.ToTable("ProductCategoryTranslations");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductCategoryTranslationId = 1,
+                            LanguageId = "vi-VN",
+                            ProductCategoryId = 1,
+                            ProductCategoryTranslationName = "Sen đá cỡ nhỏ",
+                            SeoAlias = "sen-da-co-nho",
+                            SeoDescription = "Sen đá cỡ nhỏ",
+                            SeoTitle = "Sen đá cỡ nhỏ"
+                        },
+                        new
+                        {
+                            ProductCategoryTranslationId = 2,
+                            LanguageId = "en-US",
+                            ProductCategoryId = 1,
+                            ProductCategoryTranslationName = "Small Stone Lotus",
+                            SeoAlias = "Small-Stone-Lotus",
+                            SeoDescription = "Small Stone Lotus",
+                            SeoTitle = "Small Stone Lotus"
+                        },
+                        new
+                        {
+                            ProductCategoryTranslationId = 3,
+                            LanguageId = "vi-VN",
+                            ProductCategoryId = 2,
+                            ProductCategoryTranslationName = "Sen đá cỡ Lớn",
+                            SeoAlias = "Sen-Da-Co-Lon",
+                            SeoDescription = "Sen đá cỡ Lớn",
+                            SeoTitle = "Sen đá cỡ Lớn"
+                        },
+                        new
+                        {
+                            ProductCategoryTranslationId = 4,
+                            LanguageId = "en-US",
+                            ProductCategoryId = 2,
+                            ProductCategoryTranslationName = "Big Stone Lotus",
+                            SeoAlias = "Big-Stone-Lotus",
+                            SeoDescription = "Big Stone Lotus",
+                            SeoTitle = "Big Stone Lotus"
+                        },
+                        new
+                        {
+                            ProductCategoryTranslationId = 5,
+                            LanguageId = "vi-VN",
+                            ProductCategoryId = 3,
+                            ProductCategoryTranslationName = "Xương Rồng",
+                            SeoAlias = "Xuong-Rong",
+                            SeoDescription = "Sen đá cỡ Lớn",
+                            SeoTitle = "Sen đá cỡ Lớn"
+                        },
+                        new
+                        {
+                            ProductCategoryTranslationId = 6,
+                            LanguageId = "en-US",
+                            ProductCategoryId = 3,
+                            ProductCategoryTranslationName = "Cactus",
+                            SeoAlias = "Cactus",
+                            SeoDescription = "Cactus",
+                            SeoTitle = "Cactus"
+                        });
                 });
 
             modelBuilder.Entity("VuonSenDaShop.Data.Entities.ProductMainCategory", b =>
@@ -900,6 +1276,28 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasKey("ProductMainCategoryId");
 
                     b.ToTable("ProductMainCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductMainCategoryId = 1,
+                            Avatar = "hinh",
+                            CreateBy = "Admin",
+                            Dercription = "Sen đá bịch/chậu nhựa",
+                            Position = 0,
+                            ProductMainCategoryName = "Sen đá bịch/chậu nhựa",
+                            Status = 1
+                        },
+                        new
+                        {
+                            ProductMainCategoryId = 2,
+                            Avatar = "hinh",
+                            CreateBy = "Admin",
+                            Dercription = "Xương rồng",
+                            Position = 0,
+                            ProductMainCategoryName = "Xương rồng",
+                            Status = 1
+                        });
                 });
 
             modelBuilder.Entity("VuonSenDaShop.Data.Entities.ProductMainCategoryTranslation", b =>
@@ -911,12 +1309,6 @@ namespace VuonSenDaShop.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Dercription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("LanguageId")
                         .IsRequired()
                         .HasColumnType("varchar(5)")
@@ -926,7 +1318,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<int>("ProductMainCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductMainCategoryName")
+                    b.Property<string>("ProductMainCategoryTranslationName")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
@@ -951,6 +1343,48 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasIndex("ProductMainCategoryId");
 
                     b.ToTable("ProductMainCategoryTranslations");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductMainCategoryTranslationId = 1,
+                            LanguageId = "vi-VN",
+                            ProductMainCategoryId = 1,
+                            ProductMainCategoryTranslationName = "Sen đá bịch/chậu nhựa",
+                            SeoAlias = "sen-da-bich-chau-nhua",
+                            SeoDescription = "Sen đá bịch/chậu nhựa",
+                            SeoTitle = "Sen đá bịch/chậu nhựa"
+                        },
+                        new
+                        {
+                            ProductMainCategoryTranslationId = 2,
+                            LanguageId = "en-US",
+                            ProductMainCategoryId = 1,
+                            ProductMainCategoryTranslationName = "Stone Lotus Plastic Pots",
+                            SeoAlias = "Stone-Lotus-Plastic-Pots",
+                            SeoDescription = "Stone-Lotus-Plastic-Pots",
+                            SeoTitle = "Stone-Lotus-Plastic-Pots"
+                        },
+                        new
+                        {
+                            ProductMainCategoryTranslationId = 3,
+                            LanguageId = "vi-VN",
+                            ProductMainCategoryId = 2,
+                            ProductMainCategoryTranslationName = "Xương rồng",
+                            SeoAlias = "Xuong-Rong",
+                            SeoDescription = "Xương rồng",
+                            SeoTitle = "Xương rồng"
+                        },
+                        new
+                        {
+                            ProductMainCategoryTranslationId = 4,
+                            LanguageId = "en-US",
+                            ProductMainCategoryId = 2,
+                            ProductMainCategoryTranslationName = "Cactus",
+                            SeoAlias = "Cactus",
+                            SeoDescription = "Cactus",
+                            SeoTitle = "Cactus"
+                        });
                 });
 
             modelBuilder.Entity("VuonSenDaShop.Data.Entities.ProductTranslation", b =>
@@ -977,7 +1411,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ProductName")
+                    b.Property<string>("ProductTranslationName")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)")
                         .HasMaxLength(200);
@@ -1002,6 +1436,68 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductTranslations");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductTranslationId = 1,
+                            LanguageId = "vi-VN",
+                            ProductId = 1,
+                            ProductTranslationName = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
+                            SeoAlias = "sen-du-hong-3-5cm",
+                            SeoDescription = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
+                            SeoTitle = "Sen Dù Hồng 3-5cm (Chậu Nhựa)"
+                        },
+                        new
+                        {
+                            ProductTranslationId = 2,
+                            LanguageId = "en-US",
+                            ProductId = 1,
+                            ProductTranslationName = "Stone Lotus Du Hong 3-5cm (Plastic pots)",
+                            SeoAlias = "Stone-Lotus-Du-Hong-3-5cm-(Plastic-pots)",
+                            SeoDescription = "Stone Lotus Du Hong 3-5cm (Plastic pots)",
+                            SeoTitle = "Stone Lotus Du Hong 3-5cm (Plastic pots)"
+                        },
+                        new
+                        {
+                            ProductTranslationId = 3,
+                            LanguageId = "vi-VN",
+                            ProductId = 2,
+                            ProductTranslationName = "Sen Dù Hồng 5-10cm ",
+                            SeoAlias = "sen-du-hong-3-5cm",
+                            SeoDescription = "Sen Dù Hồng 3-5cm ",
+                            SeoTitle = "Sen Dù Hồng 3-5cm "
+                        },
+                        new
+                        {
+                            ProductTranslationId = 4,
+                            LanguageId = "en-US",
+                            ProductId = 2,
+                            ProductTranslationName = "Stone Lotus Du Hong 5-10cm ",
+                            SeoAlias = "Stone-Lotus-Du-Hong-5-10cm",
+                            SeoDescription = "Stone Lotus Du Hong 5-10cm",
+                            SeoTitle = "Stone Lotus Du Hong 5-10cm"
+                        },
+                        new
+                        {
+                            ProductTranslationId = 5,
+                            LanguageId = "vi-VN",
+                            ProductId = 3,
+                            ProductTranslationName = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
+                            SeoAlias = "xuong-rong-than-long",
+                            SeoDescription = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
+                            SeoTitle = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) "
+                        },
+                        new
+                        {
+                            ProductTranslationId = 6,
+                            LanguageId = "en-US",
+                            ProductId = 3,
+                            ProductTranslationName = "Dragon Spirit Cactus 7-9cm (Plastic Pots)",
+                            SeoAlias = "Dragon-Spirit-Cactus-7-9cm-Plastic Pots",
+                            SeoDescription = "Dragon Spirit Cactus 7-9cm (Plastic Pots)",
+                            SeoTitle = "Dragon Spirit Cactus 7-9cm (Plastic Pots)"
+                        });
                 });
 
             modelBuilder.Entity("ShopOnlineGamingPC.Data.Entities.Cart", b =>
@@ -1009,6 +1505,21 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasOne("VuonSenDaShop.Data.Entities.Product", "Product")
                         .WithMany("Carts")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VuonSenDaShop.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Carts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ShopOnlineGamingPC.Data.Entities.Order", b =>
+                {
+                    b.HasOne("VuonSenDaShop.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Orders")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1024,6 +1535,15 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasOne("VuonSenDaShop.Data.Entities.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ShopOnlineGamingPC.Data.Entities.Transaction", b =>
+                {
+                    b.HasOne("VuonSenDaShop.Data.Entities.AppUser", "AppUser")
+                        .WithMany("Transactions")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

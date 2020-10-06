@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using VuonSenDaShop.Data.Entities;
 
 namespace ShopOnlineGamingPC.Data.Entities
 {
@@ -17,6 +18,6 @@ namespace ShopOnlineGamingPC.Data.Entities
         public OrderStatus Status { set; get; }
 
         public List<OrderDetail> OrderDetails { get; set; }
-
+        public AppUser AppUser { get; set; }
     }
 }

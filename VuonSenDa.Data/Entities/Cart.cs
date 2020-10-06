@@ -13,6 +13,7 @@ namespace ShopOnlineGamingPC.Data.Entities
         public decimal Price { set; get; }
 
         public Guid UserId { get; set; }
+        public AppUser AppUser { get; set; }
 
         public Product Product { get; set; }
 

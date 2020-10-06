@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Transactions;
+using VuonSenDaShop.Data.Entities;
 
 namespace ShopOnlineGamingPC.Data.Entities
 {
@@ -17,5 +18,7 @@ namespace ShopOnlineGamingPC.Data.Entities
         public TransactionStatus Status { set; get; }
         public string Provider { set; get; }
 
+        public Guid UserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }
