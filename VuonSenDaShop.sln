@@ -10,9 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuonSenDaShop.Data", "VuonSenDa.Data\VuonSenDaShop.Data.csproj", "{19AB3C0A-D5CA-40CC-9E71-4816AA5E2D98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VuonSenDaShop.Data", "VuonSenDa.Data\VuonSenDaShop.Data.csproj", "{19AB3C0A-D5CA-40CC-9E71-4816AA5E2D98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuonSenDaShop.Application", "VuonSenDaShop.Application\VuonSenDaShop.Application.csproj", "{A349BF55-1248-497C-835B-347EC95F9334}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VuonSenDaShop.Application", "VuonSenDaShop.Application\VuonSenDaShop.Application.csproj", "{A349BF55-1248-497C-835B-347EC95F9334}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuonSenDa.Utilities", "VuonSenDa.Utilities\VuonSenDa.Utilities.csproj", "{420BEC44-7C66-4702-93A1-8C5E968C725D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{A349BF55-1248-497C-835B-347EC95F9334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A349BF55-1248-497C-835B-347EC95F9334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A349BF55-1248-497C-835B-347EC95F9334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{420BEC44-7C66-4702-93A1-8C5E968C725D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{420BEC44-7C66-4702-93A1-8C5E968C725D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{420BEC44-7C66-4702-93A1-8C5E968C725D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{420BEC44-7C66-4702-93A1-8C5E968C725D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
