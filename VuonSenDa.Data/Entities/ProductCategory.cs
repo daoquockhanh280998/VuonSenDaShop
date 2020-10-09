@@ -8,11 +8,8 @@ namespace VuonSenDaShop.Data.Entities
     public class ProductCategory 
     {
         public int ProductCategoryId { get; set; }
-        public string ProductCategoryName { get; set; }
-        public string Dercription { get; set; }
         public string Avatar { get; set; }
         public string Thumb { get; set; }
-        public int Position { get; set; }
         public Status Status { get; set; }
         public DateTime? DateCreate { get; set; }
         public string CreateBy { get; set; }

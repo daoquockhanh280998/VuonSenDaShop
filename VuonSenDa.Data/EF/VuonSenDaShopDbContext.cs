@@ -37,6 +37,7 @@ namespace VuonSenDaShop.Data.EF
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
 
             modelBuilder.ApplyConfiguration(new PictureConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
 
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
@@ -80,6 +81,7 @@ namespace VuonSenDaShop.Data.EF
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Picture> Pictures { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }

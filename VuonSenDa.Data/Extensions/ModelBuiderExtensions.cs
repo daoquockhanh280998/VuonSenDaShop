@@ -34,22 +34,16 @@ namespace VuonSenDaShop.Data.Extensions
                    new ProductMainCategory()
                    {
                        ProductMainCategoryId = 1,
-                       ProductMainCategoryName = "Sen đá bịch/chậu nhựa",
-                       Dercription = "Sen đá bịch/chậu nhựa",
                        Avatar = "hinh",
                        Thumb = null,
-                       Position = 0,
                        Status = Status.Active,
                        CreateBy = "Admin"
                    },
                    new ProductMainCategory()
                    {
                        ProductMainCategoryId = 2,
-                       ProductMainCategoryName = "Xương rồng",
-                       Dercription = "Xương rồng",
                        Avatar = "hinh",
                        Thumb = null,
-                       Position = 0,
                        Status = Status.Active,
                        CreateBy = "Admin"
                    }
@@ -109,11 +103,8 @@ namespace VuonSenDaShop.Data.Extensions
                    new ProductCategory()
                    {
                        ProductCategoryId = 1,
-                       ProductCategoryName = "Sen đá cỡ nhỏ",
-                       Dercription = "Sen đá cỡ nhỏ",
                        Avatar = "hinh",
                        Thumb = null,
-                       Position = 0,
                        Status = Status.Active,
                        CreateBy = "Admin",
                        ProductMainCategoryId = 1
@@ -121,11 +112,8 @@ namespace VuonSenDaShop.Data.Extensions
                     new ProductCategory()
                     {
                         ProductCategoryId = 2,
-                        ProductCategoryName = "Sen đá cỡ Lớn",
-                        Dercription = "Sen đá cỡ Lớn",
                         Avatar = "hinh",
                         Thumb = null,
-                        Position = 0,
                         Status = Status.Active,
                         CreateBy = "Admin",
                         ProductMainCategoryId = 1
@@ -133,11 +121,8 @@ namespace VuonSenDaShop.Data.Extensions
                      new ProductCategory()
                      {
                          ProductCategoryId = 3,
-                         ProductCategoryName = "Xương Rồng",
-                         Dercription = "Xương Rồng",
                          Avatar = "hinh",
                          Thumb = null,
-                         Position = 0,
                          Status = Status.Active,
                          CreateBy = "Admin",
                          ProductMainCategoryId = 2
@@ -215,17 +200,13 @@ namespace VuonSenDaShop.Data.Extensions
                    new Product()
                    {
                        ProductId = 1,
-                       ProductName = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
                        Price = 20000,
                        OriginalPrice = 25000,
-                       Details = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
-                       Dercription = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
                        Avatar = "hinh",
                        Thumb = null,
                        Stock = 0,
                        ViewTime = 0,
                        ViewCount = 0,
-                       Position = 0,
                        Status = Status.Active,
                        CreateBy = "Admin",
                        ProductCategoryId = 1
@@ -233,17 +214,13 @@ namespace VuonSenDaShop.Data.Extensions
                     new Product()
                     {
                         ProductId = 2,
-                        ProductName = "Sen Dù Hồng 5-10cm ",
                         Price = 40000,
                         OriginalPrice = 45000,
-                        Details = "Sen Dù Hồng 5-10cm ",
-                        Dercription = "Sen Dù Hồng 5-10cm ",
                         Avatar = "hinh",
                         Thumb = null,
                         Stock = 0,
                         ViewTime = 0,
                         ViewCount = 0,
-                        Position = 0,
                         Status = Status.Active,
                         CreateBy = "Admin",
                         ProductCategoryId = 2
@@ -251,17 +228,14 @@ namespace VuonSenDaShop.Data.Extensions
                       new Product()
                       {
                           ProductId = 3,
-                          ProductName = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
                           Price = 50000,
                           OriginalPrice = 55000,
-                          Details = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
-                          Dercription = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
+                         
                           Avatar = "hinh",
                           Thumb = null,
                           Stock = 0,
                           ViewTime = 0,
                           ViewCount = 0,
-                          Position = 0,
                           Status = Status.Active,
                           CreateBy = "Admin",
                           ProductCategoryId = 3
@@ -276,6 +250,8 @@ namespace VuonSenDaShop.Data.Extensions
                        ProductTranslationId = 1,
                        ProductTranslationName = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
                        LanguageId = "vi-VN",
+                       Details = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
+                       Dercription = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
                        SeoAlias = "sen-du-hong-3-5cm",
                        SeoDescription = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
                        SeoTitle = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
@@ -286,6 +262,8 @@ namespace VuonSenDaShop.Data.Extensions
                        ProductTranslationId = 2,
                        ProductTranslationName = "Stone Lotus Du Hong 3-5cm (Plastic pots)",
                        LanguageId = "en-US",
+                       Details = "Pink  Stone Lotus 3-5cm (Plastic Pots)",
+                       Dercription = "Pink  Stone Lotus 3-5cm (Plastic Pots)",
                        SeoAlias = "Stone-Lotus-Du-Hong-3-5cm-(Plastic-pots)",
                        SeoDescription = "Stone Lotus Du Hong 3-5cm (Plastic pots)",
                        SeoTitle = "Stone Lotus Du Hong 3-5cm (Plastic pots)",
@@ -296,6 +274,8 @@ namespace VuonSenDaShop.Data.Extensions
                         ProductTranslationId = 3,
                         ProductTranslationName = "Sen Dù Hồng 5-10cm ",
                         LanguageId = "vi-VN",
+                        Details = "Sen Dù Hồng 5-10cm ",
+                        Dercription = "Sen Dù Hồng 5-10cm ",
                         SeoAlias = "sen-du-hong-3-5cm",
                         SeoDescription = "Sen Dù Hồng 3-5cm ",
                         SeoTitle = "Sen Dù Hồng 3-5cm ",
@@ -306,6 +286,8 @@ namespace VuonSenDaShop.Data.Extensions
                        ProductTranslationId = 4,
                        ProductTranslationName = "Stone Lotus Du Hong 5-10cm ",
                        LanguageId = "en-US",
+                       Details = "Pink  Stone Lotus 5-10cm (Plastic Pots)",
+                       Dercription = "Pink  Stone Lotus 5-10cm (Plastic Pots)",
                        SeoAlias = "Stone-Lotus-Du-Hong-5-10cm",
                        SeoDescription = "Stone Lotus Du Hong 5-10cm",
                        SeoTitle = "Stone Lotus Du Hong 5-10cm",
@@ -316,6 +298,8 @@ namespace VuonSenDaShop.Data.Extensions
                           ProductTranslationId = 5,
                           ProductTranslationName = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
                           LanguageId = "vi-VN",
+                          Details = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
+                          Dercription = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
                           SeoAlias = "xuong-rong-than-long",
                           SeoDescription = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
                           SeoTitle = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
@@ -326,6 +310,8 @@ namespace VuonSenDaShop.Data.Extensions
                        ProductTranslationId = 6,
                        ProductTranslationName = "Dragon Spirit Cactus 7-9cm (Plastic Pots)",
                        LanguageId = "en-US",
+                       Details = "Dragon Spirit Cactus 7-9cm (Plastic Pots)",
+                       Dercription = "Dragon Spirit Cactus 7-9cm (Plastic Pots) ",
                        SeoAlias = "Dragon-Spirit-Cactus-7-9cm-Plastic Pots",
                        SeoDescription = "Dragon Spirit Cactus 7-9cm (Plastic Pots)",
                        SeoTitle = "Dragon Spirit Cactus 7-9cm (Plastic Pots)",

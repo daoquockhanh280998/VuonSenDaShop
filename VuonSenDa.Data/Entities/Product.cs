@@ -9,17 +9,13 @@ namespace VuonSenDaShop.Data.Entities
     public class Product
     {
         public int ProductId { get; set; }
-        public string ProductName { get; set; }
         public decimal Price { get; set; }
         public decimal OriginalPrice { get; set; }
-        public string Details { set; get; }
-        public string Dercription { get; set; }
         public string Avatar { get; set; }
         public string Thumb { get; set; }
         public int Stock { get; set; }
         public int ViewTime { get; set; }
         public int ViewCount { get; set; }
-        public int Position { get; set; }
         public Status Status { get; set; }
         public DateTime? DateCreate { get; set; }
         public string CreateBy { get; set; }
@@ -28,5 +24,6 @@ namespace VuonSenDaShop.Data.Entities
         public List<OrderDetail>  OrderDetails { get; set; }
         public List<Cart> Carts { get; set; }
         public List<ProductTranslation> ProductTranslations { get; set; }
+        public List<ProductImage> ProductImages { get; set; }
     }
 }

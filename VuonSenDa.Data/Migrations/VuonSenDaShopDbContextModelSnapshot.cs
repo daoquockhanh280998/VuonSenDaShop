@@ -229,9 +229,7 @@ namespace VuonSenDaShop.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("OrderDate")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 6, 10, 49, 15, 978, DateTimeKind.Local).AddTicks(8592));
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ShipAddress")
                         .IsRequired()
@@ -516,7 +514,7 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             Id = new Guid("7ed48c67-f62f-43df-ad4b-1ff27e5daf21"),
-                            ConcurrencyStamp = "e6976900-9f3c-4d14-9514-efa1b9a3b963",
+                            ConcurrencyStamp = "d76e36db-099e-4dcb-8b43-52e6b1b3b910",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -593,7 +591,7 @@ namespace VuonSenDaShop.Data.Migrations
                         {
                             Id = new Guid("08f06ac0-5706-465e-ad7b-5bfa88117b00"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "561c578a-a109-4d66-b7e6-0277049defd0",
+                            ConcurrencyStamp = "7d820ae9-ea0e-4aac-b131-736c762cab5d",
                             DOB = new DateTime(2020, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "daoquockhanh280998@gmail.com",
                             EmailConfirmed = true,
@@ -602,7 +600,7 @@ namespace VuonSenDaShop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "daoquockhanh280998@gmail.co",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAENSWgHnzxn3RTGnXipjZt6nPBTQwlcNrpyES6BGV6CfkTYU9yHnrsBWajFTn6rcEKw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDoRlBNvhyj9ddARcXF8Mj2N5uph5Bfc4TnikZPtW4K0ED82yn40bffOmd0PT1YcKg==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -863,7 +861,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 6, 10, 49, 15, 973, DateTimeKind.Local).AddTicks(9571));
+                        .HasDefaultValue(new DateTime(2020, 10, 8, 16, 8, 10, 562, DateTimeKind.Local).AddTicks(9285));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -911,7 +909,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 6, 10, 49, 15, 984, DateTimeKind.Local).AddTicks(7385));
+                        .HasDefaultValue(new DateTime(2020, 10, 8, 16, 8, 10, 573, DateTimeKind.Local).AddTicks(7833));
 
                     b.Property<string>("PictureName")
                         .IsRequired()
@@ -962,30 +960,14 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Dercription")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
-                    b.Property<string>("Details")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
                     b.Property<decimal>("OriginalPrice")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("ProductCategoryId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
 
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
@@ -1019,13 +1001,9 @@ namespace VuonSenDaShop.Data.Migrations
                             ProductId = 1,
                             Avatar = "hinh",
                             CreateBy = "Admin",
-                            Dercription = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
-                            Details = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
                             OriginalPrice = 25000m,
-                            Position = 0,
                             Price = 20000m,
                             ProductCategoryId = 1,
-                            ProductName = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
                             Status = 1,
                             Stock = 0,
                             ViewCount = 0,
@@ -1036,13 +1014,9 @@ namespace VuonSenDaShop.Data.Migrations
                             ProductId = 2,
                             Avatar = "hinh",
                             CreateBy = "Admin",
-                            Dercription = "Sen Dù Hồng 5-10cm ",
-                            Details = "Sen Dù Hồng 5-10cm ",
                             OriginalPrice = 45000m,
-                            Position = 0,
                             Price = 40000m,
                             ProductCategoryId = 2,
-                            ProductName = "Sen Dù Hồng 5-10cm ",
                             Status = 1,
                             Stock = 0,
                             ViewCount = 0,
@@ -1053,13 +1027,9 @@ namespace VuonSenDaShop.Data.Migrations
                             ProductId = 3,
                             Avatar = "hinh",
                             CreateBy = "Admin",
-                            Dercription = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
-                            Details = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
                             OriginalPrice = 55000m,
-                            Position = 0,
                             Price = 50000m,
                             ProductCategoryId = 3,
-                            ProductName = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
                             Status = 1,
                             Stock = 0,
                             ViewCount = 0,
@@ -1088,18 +1058,6 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Dercription")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductCategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
                     b.Property<int>("ProductMainCategoryId")
                         .HasColumnType("int");
 
@@ -1124,9 +1082,6 @@ namespace VuonSenDaShop.Data.Migrations
                             ProductCategoryId = 1,
                             Avatar = "hinh",
                             CreateBy = "Admin",
-                            Dercription = "Sen đá cỡ nhỏ",
-                            Position = 0,
-                            ProductCategoryName = "Sen đá cỡ nhỏ",
                             ProductMainCategoryId = 1,
                             Status = 1
                         },
@@ -1135,9 +1090,6 @@ namespace VuonSenDaShop.Data.Migrations
                             ProductCategoryId = 2,
                             Avatar = "hinh",
                             CreateBy = "Admin",
-                            Dercription = "Sen đá cỡ Lớn",
-                            Position = 0,
-                            ProductCategoryName = "Sen đá cỡ Lớn",
                             ProductMainCategoryId = 1,
                             Status = 1
                         },
@@ -1146,9 +1098,6 @@ namespace VuonSenDaShop.Data.Migrations
                             ProductCategoryId = 3,
                             Avatar = "hinh",
                             CreateBy = "Admin",
-                            Dercription = "Xương Rồng",
-                            Position = 0,
-                            ProductCategoryName = "Xương Rồng",
                             ProductMainCategoryId = 2,
                             Status = 1
                         });
@@ -1267,6 +1216,46 @@ namespace VuonSenDaShop.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ProductImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ProductImages");
+                });
+
             modelBuilder.Entity("VuonSenDaShop.Data.Entities.ProductMainCategory", b =>
                 {
                     b.Property<int>("ProductMainCategoryId")
@@ -1288,18 +1277,6 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Dercription")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
-                    b.Property<int>("Position")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProductMainCategoryName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(500)")
-                        .HasMaxLength(500);
-
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -1319,9 +1296,6 @@ namespace VuonSenDaShop.Data.Migrations
                             ProductMainCategoryId = 1,
                             Avatar = "hinh",
                             CreateBy = "Admin",
-                            Dercription = "Sen đá bịch/chậu nhựa",
-                            Position = 0,
-                            ProductMainCategoryName = "Sen đá bịch/chậu nhựa",
                             Status = 1
                         },
                         new
@@ -1329,9 +1303,6 @@ namespace VuonSenDaShop.Data.Migrations
                             ProductMainCategoryId = 2,
                             Avatar = "hinh",
                             CreateBy = "Admin",
-                            Dercription = "Xương rồng",
-                            Position = 0,
-                            ProductMainCategoryName = "Xương rồng",
                             Status = 1
                         });
                 });
@@ -1477,6 +1448,8 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductTranslationId = 1,
+                            Dercription = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
+                            Details = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
                             LanguageId = "vi-VN",
                             ProductId = 1,
                             ProductTranslationName = "Sen Dù Hồng 3-5cm (Chậu Nhựa)",
@@ -1487,6 +1460,8 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductTranslationId = 2,
+                            Dercription = "Pink  Stone Lotus 3-5cm (Plastic Pots)",
+                            Details = "Pink  Stone Lotus 3-5cm (Plastic Pots)",
                             LanguageId = "en-US",
                             ProductId = 1,
                             ProductTranslationName = "Stone Lotus Du Hong 3-5cm (Plastic pots)",
@@ -1497,6 +1472,8 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductTranslationId = 3,
+                            Dercription = "Sen Dù Hồng 5-10cm ",
+                            Details = "Sen Dù Hồng 5-10cm ",
                             LanguageId = "vi-VN",
                             ProductId = 2,
                             ProductTranslationName = "Sen Dù Hồng 5-10cm ",
@@ -1507,6 +1484,8 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductTranslationId = 4,
+                            Dercription = "Pink  Stone Lotus 5-10cm (Plastic Pots)",
+                            Details = "Pink  Stone Lotus 5-10cm (Plastic Pots)",
                             LanguageId = "en-US",
                             ProductId = 2,
                             ProductTranslationName = "Stone Lotus Du Hong 5-10cm ",
@@ -1517,6 +1496,8 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductTranslationId = 5,
+                            Dercription = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
+                            Details = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
                             LanguageId = "vi-VN",
                             ProductId = 3,
                             ProductTranslationName = "Xương Rồng Thần Long 7-9cm (Chậu Nhựa) ",
@@ -1527,6 +1508,8 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductTranslationId = 6,
+                            Dercription = "Dragon Spirit Cactus 7-9cm (Plastic Pots) ",
+                            Details = "Dragon Spirit Cactus 7-9cm (Plastic Pots)",
                             LanguageId = "en-US",
                             ProductId = 3,
                             ProductTranslationName = "Dragon Spirit Cactus 7-9cm (Plastic Pots)",
@@ -1640,6 +1623,15 @@ namespace VuonSenDaShop.Data.Migrations
                     b.HasOne("VuonSenDaShop.Data.Entities.ProductCategory", "ProductCategory")
                         .WithMany("ProductCategoryTranslations")
                         .HasForeignKey("ProductCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ProductImage", b =>
+                {
+                    b.HasOne("VuonSenDaShop.Data.Entities.Product", "Product")
+                        .WithMany("ProductImages")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
