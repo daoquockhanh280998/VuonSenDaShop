@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using VuonSenDaShop.Application.Catalog.Products.Dtos_DatatranferObject_;
-using VuonSenDaShop.Application.Catalog.Products.Dtos_DatatranferObject_.Public;
-using VuonSenDaShop.Application.Dtos;
 using VuonSenDaShop.Data.EF;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using VuonSenDa.ViewModels.Catalog.Products;
+using VuonSenDa.ViewModels.Common;
 
 namespace VuonSenDaShop.Application.Catalog.Products
 {
@@ -18,7 +17,40 @@ namespace VuonSenDaShop.Application.Catalog.Products
         {
             _db = db;
         }
-        public async Task<PagedResult<ProductViewMolde>> GetALLByCategoryID(GetProductPagingRequest request)
+
+        public async Task<List<ProductViewMolde>> GetAll()
+        {
+            var query = from p in _db.Products
+                        join pc in _db.ProductCategories on p.ProductCategoryId equals pc.ProductCategoryId
+                        join pmc in _db.ProductMainCategories on pc.ProductMainCategoryId equals pmc.ProductMainCategoryId
+                        join pt in _db.ProductTranslations on p.ProductId equals pt.ProductId
+                        select new { p, pt, pmc, pc };
+
+            var data = await query
+               .Select(x => new ProductViewMolde()
+               {
+                   ProductId = x.p.ProductId,
+                   ProductTranslationName = x.pt.ProductTranslationName,
+                   Avatar = x.p.Avatar,
+                   Thumb = x.p.Thumb,
+                   DateCreate = x.p.DateCreate,
+                   Dercription = x.pt.Dercription,
+                   Details = x.pt.Details,
+                   LanguageId = x.pt.LanguageId,
+                   Price = x.p.Price,
+                   OriginalPrice = x.p.OriginalPrice,
+                   SeoAlias = x.pt.SeoAlias,
+                   SeoDescription = x.pt.SeoDescription,
+                   SeoTitle = x.pt.SeoTitle,
+                   Stock = x.p.Stock,
+                   ViewCount = x.p.ViewCount,
+                   ViewTime = x.p.ViewTime
+               }).ToListAsync();
+
+            return data;
+        }
+
+        public async Task<PagedResult<ProductViewMolde>> GetALLByCategoryID(GetPublicProductPagingRequest request)
         {
             //1.select join
             var query = from p in _db.Products
@@ -68,7 +100,7 @@ namespace VuonSenDaShop.Application.Catalog.Products
             return pageResult;
         }
 
-        public async Task<PagedResult<ProductViewMolde>> GetALLByMainCategoryID(GetProductPagingRequest request)
+        public async Task<PagedResult<ProductViewMolde>> GetALLByMainCategoryID(GetPublicProductPagingRequest request)
         {
             //1.select join
             var query = from p in _db.Products
@@ -117,5 +149,7 @@ namespace VuonSenDaShop.Application.Catalog.Products
             };
             return pageResult;
         }
+
+
     }
 }

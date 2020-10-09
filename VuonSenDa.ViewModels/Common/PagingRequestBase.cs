@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace VuonSenDaShop.Application.Dtos
+namespace VuonSenDa.ViewModels.Common
 {
     public class PagingRequestBase
     {

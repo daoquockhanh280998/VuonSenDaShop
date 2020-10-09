@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace VuonSenDaShop.Application.Catalog.Products.Dtos_DatatranferObject_
+namespace VuonSenDa.ViewModels.Catalog.Products
 {
     public class ProductViewMolde
     {

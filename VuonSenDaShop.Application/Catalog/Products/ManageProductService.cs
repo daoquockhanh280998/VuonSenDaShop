@@ -1,14 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using VuonSenDa.Utilities.Exceptions;
-using VuonSenDaShop.Application.Catalog.Products.Dtos_DatatranferObject_;
-using VuonSenDaShop.Application.Catalog.Products.Dtos_DatatranferObject_.Manage;
-using VuonSenDaShop.Application.Dtos;
+using VuonSenDa.ViewModels.Catalog.Products;
+using VuonSenDa.ViewModels.Common;
+using VuonSenDaShop.Application.Common;
 using VuonSenDaShop.Data.EF;
 using VuonSenDaShop.Data.Entities;
 
@@ -18,9 +21,11 @@ namespace VuonSenDaShop.Application.Catalog.Products
     {
 
         private readonly VuonSenDaShopDbContext _db;
-        public ManageProductService(VuonSenDaShopDbContext db)
+        private readonly IStorageService _storageService;
+        public ManageProductService(VuonSenDaShopDbContext db, IStorageService storageService)
         {
             _db = db;
+            _storageService = storageService;
         }
         public async Task<int> Create(ProductCreateRequest request)
         {
@@ -49,8 +54,34 @@ namespace VuonSenDaShop.Application.Catalog.Products
                     }
                 }
             };
+
+            //save image
+            if (request.ThumbnailImage != null)
+            {
+                product.ProductImages = new List<ProductImage>()
+                {
+                    new ProductImage()
+                    {
+                        Caption="Thumnail image",
+                        DateCreate = DateTime.Now,
+                        FileSize = request.ThumbnailImage.Length,
+                        ImagePath = await this.SaveFile(request.ThumbnailImage),
+                        IsDefault = true,
+                        SortOrder = 1
+                    }
+                };
+            }
+
             _db.Products.Add(product);
             return await _db.SaveChangesAsync();
+        }
+
+        private async Task<string> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim();
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+            return fileName;
         }
 
         public async Task AddViewCount(int productId)
@@ -69,13 +100,17 @@ namespace VuonSenDaShop.Application.Catalog.Products
             {
                 throw new VuonSenDaException($"Cannot Find a product with id: {productID}");
             }
+            var images = _db.ProductImages.Where(x => x.ProductId == productID);
+            foreach (var image in images)
+            {
+                await _storageService.DeleteFileAsync(image.ImagePath);
+            }
             _db.Products.Remove(product);
-
             return await _db.SaveChangesAsync();
         }
 
-     
-        public async Task<PagedResult<ProductViewMolde>> GetALLPaging(GetProductPagingRequest request)
+
+        public async Task<PagedResult<ProductViewMolde>> GetALLPaging(GetManageProductPagingRequest request)
         {
             //1.select join
             var query = from p in _db.Products
@@ -138,9 +173,9 @@ namespace VuonSenDaShop.Application.Catalog.Products
         {
             var product = await _db.Products.FindAsync(request.Id);
             var productTranslations = await _db.ProductTranslations
-                                               .FirstOrDefaultAsync(x => x.ProductId == request.Id 
+                                               .FirstOrDefaultAsync(x => x.ProductId == request.Id
                                                && x.LanguageId == request.LanguageId);
-                                        
+
             if (product == null || productTranslations == null)
                 throw new VuonSenDaException($"Cannot Find a product with id: {request.Id}");
 
@@ -151,6 +186,19 @@ namespace VuonSenDaShop.Application.Catalog.Products
             productTranslations.SeoDescription = request.SeoDescription;
             productTranslations.SeoTitle = request.SeoTitle;
             productTranslations.ProductTranslationName = request.ProductTranslationName;
+            //save image
+            if (request.ThumbnailImage != null)
+            {
+                var thumbnailImage = await _db.ProductImages
+                                              .FirstOrDefaultAsync(x => x.IsDefault == true
+                                              && x.ProductId == request.Id);
+                if (thumbnailImage != null)
+                {
+                    thumbnailImage.FileSize = request.ThumbnailImage.Length;
+                    thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImage);
+                    _db.ProductImages.Update(thumbnailImage);
+                }
+            }
 
             return await _db.SaveChangesAsync();
         }
@@ -158,10 +206,10 @@ namespace VuonSenDaShop.Application.Catalog.Products
         public async Task<bool> UpdatePrice(int productId, decimal newPrice)
         {
             var product = await _db.Products.FindAsync(productId);
-            if (product == null )
+            if (product == null)
                 throw new VuonSenDaException($"Cannot Find a product with id: {productId}");
             product.Price = newPrice;
-            return await _db.SaveChangesAsync() > 0 ;// save thành công sẽ là true và nguoc lai
+            return await _db.SaveChangesAsync() > 0;// save thành công sẽ là true và nguoc lai
         }
 
         public async Task<bool> UpdateStock(int productId, int addQuantity)
@@ -171,6 +219,50 @@ namespace VuonSenDaShop.Application.Catalog.Products
                 throw new VuonSenDaException($"Cannot Find a product with id: {productId}");
             product.Stock += addQuantity;
             return await _db.SaveChangesAsync() > 0;// save thành công sẽ là true và nguoc lai
+        }
+
+        public async Task<int> AddImages(ImageCreateRequest request)
+        {
+            var image = new ProductImage()
+            {
+                ProductId = request.ProductId,
+                Caption = request.Caption,
+                DateCreate = DateTime.Now,
+                FileSize = request.FileSize,
+                ImagePath = request.ImagePath,
+                IsDefault = request.IsDefault,
+                SortOrder = request.SortOrder
+            };
+            _db.ProductImages.Add(image);
+            return await _db.SaveChangesAsync();
+        }
+
+        public async Task<int> RemoveImages(int imageId)
+        {
+            var images = _db.ProductImages.Where(x => x.Id == imageId).FirstOrDefault();
+
+            _db.ProductImages.Remove(images);
+            return await _db.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateImages(ImageCreateRequest request)
+        {
+            var image = await _db.ProductImages.FindAsync(request.Id);
+            if (image == null)
+                throw new VuonSenDaException($"Cannot Find a image with id: {request.Id}");
+
+            image.Caption = request.Caption;
+            image.FileSize = request.FileSize;
+            image.ImagePath = request.ImagePath;
+            image.IsDefault = request.IsDefault;
+            image.SortOrder = request.SortOrder;
+
+            return await _db.SaveChangesAsync();
+        }
+
+        public Task<List<ProductImageViewModel>> GetListImage(int productId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

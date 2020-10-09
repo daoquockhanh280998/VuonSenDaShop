@@ -1,10 +1,12 @@
-﻿using System;
+﻿
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace VuonSenDaShop.Data.Entities
+namespace VuonSenDa.ViewModels.Catalog.Products
 {
-   public class ProductImage
+    public class ImageCreateRequest
     {
         public int Id { get; set; }
         public int ProductId { get; set; }
@@ -14,6 +16,7 @@ namespace VuonSenDaShop.Data.Entities
         public DateTime DateCreate { get; set; }
         public int SortOrder { get; set; }
         public long FileSize { get; set; }
-        public Product Product { get; set; }
+        //IFormFile là kiểu file nhị phân
+        public IFormFile formFiles { get; set; }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using VuonSenDaShop.Application.Dtos;
+using VuonSenDa.ViewModels.Common;
 
-namespace VuonSenDaShop.Application.Catalog.Products.Dtos_DatatranferObject_.Manage
+namespace VuonSenDa.ViewModels.Catalog.Products
 {
-   public class GetProductPagingRequest : PagingRequestBase
+    public class GetManageProductPagingRequest : PagingRequestBase
     {
         public string keyword { get; set; }
         public List<int> MainCategoryIds { get; set; }

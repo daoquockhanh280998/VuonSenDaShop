@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
-using System.Text; 
+using System.Text;
 
-namespace VuonSenDaShop.Application.Catalog.Products.Dtos_DatatranferObject_.Manage
+namespace VuonSenDa.ViewModels.Catalog.Products
 {
     public class ProductUpdateRequest
     {
@@ -14,6 +15,7 @@ namespace VuonSenDaShop.Application.Catalog.Products.Dtos_DatatranferObject_.Man
         public string SeoTitle { set; get; }
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
-
+        //IFormFile là kiểu file nhị phân
+        public IFormFile ThumbnailImage { get; set; }
     }
 }
