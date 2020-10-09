@@ -50,4 +50,5 @@
 		-> tiếp theo ta  gõ update-database
 		
 #10 Swapger là giao diện để hiển thị danh sách những API mà k cần dùng trình duyệt
+http://bekenty.com/add-swagger-to-your-web-api-in-asp-net-core-3/
 		
