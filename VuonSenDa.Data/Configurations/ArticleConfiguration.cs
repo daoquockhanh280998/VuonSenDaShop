@@ -15,11 +15,7 @@ namespace VuonSenDaShop.Data.Configurations
         {
             builder.ToTable("Articles");
             builder.HasKey(x => x.ArticleId);
-            builder.Property(x => x.ArticleId).UseIdentityColumn();
-            builder.Property(x => x.ArticleName).HasMaxLength(255).IsUnicode(false).IsRequired();
-            builder.Property(x => x.Dercription).HasMaxLength(4000).IsRequired(false);
-            builder.Property(x => x.Avatar).HasMaxLength(4000).IsRequired(false);
-            builder.Property(x => x.Thumb).HasMaxLength(4000).IsRequired(false);
+            builder.Property(x => x.ArticleId).UseIdentityColumn(1, 1);
             builder.Property(x => x.ViewTime).HasMaxLength(50);
             builder.Property(x => x.ViewCount).HasMaxLength(50);
             builder.Property(x => x.Position).HasDefaultValue(1);

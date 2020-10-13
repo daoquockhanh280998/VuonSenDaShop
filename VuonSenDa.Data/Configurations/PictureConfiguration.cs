@@ -15,7 +15,7 @@ namespace VuonSenDaShop.Data.Configurations
         {
             builder.ToTable("Pictures");
             builder.HasKey(x => x.PictureId);
-            builder.Property(x => x.PictureId).UseIdentityColumn();
+            builder.Property(x => x.PictureId).UseIdentityColumn(1, 1);
             builder.Property(x => x.PictureName).HasMaxLength(500).IsRequired();
             builder.Property(x => x.Title).HasMaxLength(255).IsUnicode(false).IsRequired();
             builder.Property(x => x.Avatar).HasMaxLength(4000).IsRequired();

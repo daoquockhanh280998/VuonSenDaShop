@@ -11,8 +11,6 @@ namespace VuonSenDaShop.Data.Entities
         public int ProductId { get; set; }
         public decimal Price { get; set; }
         public decimal OriginalPrice { get; set; }
-        public string Avatar { get; set; }
-        public string Thumb { get; set; }
         public int Stock { get; set; }
         public int ViewTime { get; set; }
         public int ViewCount { get; set; }

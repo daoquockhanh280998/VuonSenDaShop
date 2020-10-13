@@ -15,7 +15,7 @@ namespace VuonSenDaShop.Data.Configurations.Translation
 
             builder.HasKey(x => x.ProductTranslationId);
 
-            builder.Property(x => x.ProductTranslationId).UseIdentityColumn();
+            builder.Property(x => x.ProductTranslationId).UseIdentityColumn(1,1);
 
 
             builder.Property(x => x.ProductTranslationName).IsRequired().HasMaxLength(200);

@@ -1,22 +1,20 @@
-﻿
-using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace VuonSenDa.ViewModels.Catalog.Products
+namespace VuonSenDaShop.Data.Entities
 {
-    public class ImageCreateRequest
+   public class ArticleImage
     {
         public int Id { get; set; }
-        public int ProductId { get; set; }
+        public int ArticleId { get; set; }
         public string ImagePath { get; set; }
         public string Caption { get; set; }
         public bool IsDefault { get; set; }
         public DateTime DateCreate { get; set; }
         public int SortOrder { get; set; }
         public long FileSize { get; set; }
-        //IFormFile là kiểu file nhị phân
-        public IFormFile formFiles { get; set; }
+        public Article Article { get; set; }
+
     }
 }

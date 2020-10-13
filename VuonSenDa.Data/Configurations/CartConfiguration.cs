@@ -13,7 +13,7 @@ namespace VuonSenDaShop.Data.Configurations
         {
             builder.ToTable("Carts");
             builder.HasKey(x => x.CartId);
-            builder.Property(x => x.CartId).UseIdentityColumn();
+            builder.Property(x => x.CartId).UseIdentityColumn(1, 1);
 
             builder.HasOne(x => x.Product).WithMany(x => x.Carts).HasForeignKey(x => x.ProductId);
 

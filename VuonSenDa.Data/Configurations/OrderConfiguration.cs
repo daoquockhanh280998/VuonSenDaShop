@@ -15,7 +15,7 @@ namespace VuonSenDaShop.Data.Configurations
         {
             builder.ToTable("Orders");
             builder.HasKey(x => x.OrderId);
-            builder.Property(x => x.OrderId).UseIdentityColumn();
+            builder.Property(x => x.OrderId).UseIdentityColumn(1, 1);
             builder.Property(x => x.OrderDate);
             builder.Property(x => x.ShipEmail).IsRequired().IsUnicode(false).HasMaxLength(50);
 
