@@ -9,9 +9,9 @@ namespace VuonSenDaShop.Application.Catalog.Products
 {
     public interface IPublicProductService
     {
-        Task<PagedResult<ProductViewMolde>> GetALLByMainCategoryID(GetPublicProductPagingRequest request);
-        Task<PagedResult<ProductViewMolde>> GetALLByCategoryID(GetPublicProductPagingRequest request);
+        Task<PagedResult<ProductViewMolde>> GetALLByMainCategoryID(string languageId, GetPublicProductPagingRequest request);
+        Task<PagedResult<ProductViewMolde>> GetALLByCategoryID(string languageId, GetPublicProductPagingRequest request);
 
-        Task<List<ProductViewMolde>> GetAll();
+        Task<List<ProductViewMolde>> GetAll(string languageId);
     }
 }

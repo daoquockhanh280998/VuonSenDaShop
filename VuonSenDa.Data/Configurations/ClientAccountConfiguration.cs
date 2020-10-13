@@ -15,7 +15,7 @@ namespace VuonSenDaShop.Data.Configurations
         {
             builder.ToTable("ClientAccounts");
             builder.HasKey(x => x.ClientAccountId);
-            builder.Property(x => x.ClientAccountId).UseIdentityColumn();
+            builder.Property(x => x.ClientAccountId).UseIdentityColumn(1, 1);
             builder.Property(x => x.Password).HasMaxLength(255).IsUnicode(false).IsRequired();
             builder.Property(x => x.Email).HasMaxLength(255).IsUnicode(false).IsRequired();
             builder.Property(x => x.FullName).HasMaxLength(255).IsUnicode(false).IsRequired();

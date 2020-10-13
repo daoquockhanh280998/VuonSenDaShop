@@ -10,7 +10,7 @@ namespace VuonSenDaShop.Application.Common
     public class FileStorageService : IStorageService
     {
         private readonly string _userContentFolder;
-        private const string USER_CONTENT_FOLDER_NAME = "user-content";
+        private const string USER_CONTENT_FOLDER_NAME = "Images";
 
         public FileStorageService(IWebHostEnvironment webHostEnvironment)
         {

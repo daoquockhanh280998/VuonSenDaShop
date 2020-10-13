@@ -26,7 +26,6 @@ namespace VuonSenDaShop.Data.EF
 
             modelBuilder.ApplyConfiguration(new ArticleConfiguration());
             modelBuilder.ApplyConfiguration(new ArticleCategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new ArticleMainCategoryConfiguration());
 
             modelBuilder.ApplyConfiguration(new CartConfiguration());
             modelBuilder.ApplyConfiguration(new ClientAccountConfiguration());
@@ -38,10 +37,13 @@ namespace VuonSenDaShop.Data.EF
 
             modelBuilder.ApplyConfiguration(new PictureConfiguration());
             modelBuilder.ApplyConfiguration(new ProductImageConfiguration());
+            modelBuilder.ApplyConfiguration(new ArticleImageConfiguration());
 
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
             modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ProductMainCategoryConfiguration());
+
+           
 
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
@@ -50,6 +52,9 @@ namespace VuonSenDaShop.Data.EF
             modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new ProductCategoryTranslationConfiguration());
             modelBuilder.ApplyConfiguration(new ProductMainCategoryTranslationConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ArticleTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new ArticleCategoryTranslationConfiguration());
             #endregion
 
             #region Data seeding
@@ -72,7 +77,6 @@ namespace VuonSenDaShop.Data.EF
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<ArticleCategory> ArticleCategories { get; set; }
-        public DbSet<ArticleMainCategory> ArticleMainCategories { get; set; }
 
         public DbSet<Cart> Carts { get; set; }
         public DbSet<ClientAccount> Clients { get; set; }
@@ -82,6 +86,7 @@ namespace VuonSenDaShop.Data.EF
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
+        public DbSet<ArticleImage> ArticleImages { get; set; }
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
@@ -91,7 +96,8 @@ namespace VuonSenDaShop.Data.EF
         public DbSet<ProductCategoryTranslation> ProductCategorieTranslations { get; set; }
         public DbSet<ProductMainCategoryTranslation> ProductMainCategoryTranslations { get; set; }
 
-
+        public DbSet<ArticleTranslation> ArticleTranslations { get; set; }
+        public DbSet<ArticleCategoryTranslation> ArticleCategoryTranslations { get; set; }
 
         public DbSet<Promotion> Promotions { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

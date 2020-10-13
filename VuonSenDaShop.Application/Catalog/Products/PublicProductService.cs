@@ -18,12 +18,13 @@ namespace VuonSenDaShop.Application.Catalog.Products
             _db = db;
         }
 
-        public async Task<List<ProductViewMolde>> GetAll()
+        public async Task<List<ProductViewMolde>> GetAll(string languageId)
         {
             var query = from p in _db.Products
                         join pc in _db.ProductCategories on p.ProductCategoryId equals pc.ProductCategoryId
                         join pmc in _db.ProductMainCategories on pc.ProductMainCategoryId equals pmc.ProductMainCategoryId
                         join pt in _db.ProductTranslations on p.ProductId equals pt.ProductId
+                        where pt.LanguageId == languageId
                         select new { p, pt, pmc, pc };
 
             var data = await query
@@ -31,8 +32,6 @@ namespace VuonSenDaShop.Application.Catalog.Products
                {
                    ProductId = x.p.ProductId,
                    ProductTranslationName = x.pt.ProductTranslationName,
-                   Avatar = x.p.Avatar,
-                   Thumb = x.p.Thumb,
                    DateCreate = x.p.DateCreate,
                    Dercription = x.pt.Dercription,
                    Details = x.pt.Details,
@@ -50,13 +49,14 @@ namespace VuonSenDaShop.Application.Catalog.Products
             return data;
         }
 
-        public async Task<PagedResult<ProductViewMolde>> GetALLByCategoryID(GetPublicProductPagingRequest request)
+        public async Task<PagedResult<ProductViewMolde>> GetALLByCategoryID(string languageId, GetPublicProductPagingRequest request)
         {
             //1.select join
             var query = from p in _db.Products
                         join pc in _db.ProductCategories on p.ProductCategoryId equals pc.ProductCategoryId
                         join pmc in _db.ProductMainCategories on pc.ProductMainCategoryId equals pmc.ProductMainCategoryId
                         join pt in _db.ProductTranslations on p.ProductId equals pt.ProductId
+                        where pt.LanguageId == languageId
                         select new { p, pt, pmc, pc };
             //2.filter
             //filter equals CategoryIds
@@ -75,8 +75,6 @@ namespace VuonSenDaShop.Application.Catalog.Products
                 {
                     ProductId = x.p.ProductId,
                     ProductTranslationName = x.pt.ProductTranslationName,
-                    Avatar = x.p.Avatar,
-                    Thumb = x.p.Thumb,
                     DateCreate = x.p.DateCreate,
                     Dercription = x.pt.Dercription,
                     Details = x.pt.Details,
@@ -100,13 +98,14 @@ namespace VuonSenDaShop.Application.Catalog.Products
             return pageResult;
         }
 
-        public async Task<PagedResult<ProductViewMolde>> GetALLByMainCategoryID(GetPublicProductPagingRequest request)
+        public async Task<PagedResult<ProductViewMolde>> GetALLByMainCategoryID(string languageId, GetPublicProductPagingRequest request)
         {
             //1.select join
             var query = from p in _db.Products
                         join pc in _db.ProductCategories on p.ProductCategoryId equals pc.ProductCategoryId
                         join pmc in _db.ProductMainCategories on pc.ProductMainCategoryId equals pmc.ProductMainCategoryId
                         join pt in _db.ProductTranslations on p.ProductId equals pt.ProductId
+                        where pt.LanguageId == languageId
                         select new { p, pt, pmc, pc };
             //2.filter
             //filter equals MainCategoryIds
@@ -125,8 +124,6 @@ namespace VuonSenDaShop.Application.Catalog.Products
                 {
                     ProductId = x.p.ProductId,
                     ProductTranslationName = x.pt.ProductTranslationName,
-                    Avatar = x.p.Avatar,
-                    Thumb = x.p.Thumb,
                     DateCreate = x.p.DateCreate,
                     Dercription = x.pt.Dercription,
                     Details = x.pt.Details,

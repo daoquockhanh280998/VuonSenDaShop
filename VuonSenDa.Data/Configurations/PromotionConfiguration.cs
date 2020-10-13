@@ -16,7 +16,7 @@ namespace VuonSenDaShop.Data.Configurations
             builder.ToTable("Promotions");
 
             builder.HasKey(x => x.PromotionId);
-            builder.Property(x => x.PromotionId).UseIdentityColumn();
+            builder.Property(x => x.PromotionId).UseIdentityColumn(1, 1);
 
             builder.Property(x => x.Name).IsRequired();
         }

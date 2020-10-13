@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using VuonSenDa.Utilities.Constaints;
 using VuonSenDaShop.Application.Catalog.Products;
+using VuonSenDaShop.Application.Common;
 using VuonSenDaShop.Data.EF;
 
 namespace VuonSenDa.BackEndAPI
@@ -31,7 +32,9 @@ namespace VuonSenDa.BackEndAPI
             services.AddDbContext<VuonSenDaShopDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString(SystemConstaints.MainConnectionString)));
             //Declare DI
+            services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
+            services.AddTransient<IManageProductService, ManageProductService>();
 
             services.AddControllersWithViews();
 
@@ -58,14 +61,13 @@ namespace VuonSenDa.BackEndAPI
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger VuonSeDa V1");
             });
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

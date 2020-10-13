@@ -15,7 +15,7 @@ namespace VuonSenDaShop.Data.Configurations
         {
             builder.ToTable("AdminAccountCategorys");
             builder.HasKey(x => x.AdminAccountCategoryId);
-            builder.Property(x => x.AdminAccountCategoryId).UseIdentityColumn();
+            builder.Property(x => x.AdminAccountCategoryId).UseIdentityColumn(1, 1);
             builder.Property(x => x.Title).HasMaxLength(255).IsUnicode(false).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(4000).IsRequired(false);
             builder.Property(x => x.Avatar).HasMaxLength(4000).IsRequired(false);

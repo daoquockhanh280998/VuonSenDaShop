@@ -13,20 +13,28 @@ namespace VuonSenDaShop.Application.Catalog.Products
     {
         Task<int> Create(ProductCreateRequest request);
 
-        Task<int> AddImages(ImageCreateRequest request);
-        Task<int> RemoveImages(int imageId);
-        Task<int> UpdateImages(ImageCreateRequest request);
-
         Task<int> Update(ProductUpdateRequest request);
+
+        Task<int> Delete(int productID);
+
+        Task<ProductViewMolde> GetById(int productId, string languageId);
 
         Task<bool> UpdatePrice(int productId, decimal newPrice);
 
         Task<bool> UpdateStock(int productId, int addQuantity);
 
+        Task<int> AddImages(ImageRequest request, int productId);
+
+        Task<int> UpdateImages(ImageRequest request);
+
+        Task<int> RemoveImages(int imageId);
+
+        Task<ProductImageViewModel> GetImageById(int imageId);
+
         Task AddViewCount(int productId);
-        Task<int> Delete(int productID);
 
         Task<PagedResult<ProductViewMolde>> GetALLPaging(GetManageProductPagingRequest request);
+
         Task<List<ProductImageViewModel>> GetListImage(int productId);
     }
 }

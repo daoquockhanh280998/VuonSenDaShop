@@ -19,26 +19,26 @@ namespace VuonSenDaShop.Application.Catalog.Products
 {
     public class ManageProductService : IManageProductService
     {
-
         private readonly VuonSenDaShopDbContext _db;
         private readonly IStorageService _storageService;
+
         public ManageProductService(VuonSenDaShopDbContext db, IStorageService storageService)
         {
             _db = db;
             _storageService = storageService;
         }
+
         public async Task<int> Create(ProductCreateRequest request)
         {
             var product = new Product()
             {
                 Price = request.Price,
                 OriginalPrice = request.OriginalPrice,
-                Avatar = request.Avatar,
-                Thumb = request.Thumb,
                 ViewTime = 0,
                 ViewCount = 0,
                 DateCreate = DateTime.Now,
                 CreateBy = request.CreateBy,
+                ProductCategoryId = request.ProductCategoryId,
                 ProductTranslations = new List<ProductTranslation>()
                 {
                     new ProductTranslation()
@@ -73,12 +73,13 @@ namespace VuonSenDaShop.Application.Catalog.Products
             }
 
             _db.Products.Add(product);
-            return await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
+            return product.ProductId;
         }
 
         private async Task<string> SaveFile(IFormFile file)
         {
-            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim();
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
             var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
             await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
             return fileName;
@@ -87,11 +88,12 @@ namespace VuonSenDaShop.Application.Catalog.Products
         public async Task AddViewCount(int productId)
         {
             var product = await _db.Products.FindAsync(productId);
+            if (product == null)
+                throw new VuonSenDaException($"Cannot Find a product with id: {productId}");
             product.ViewCount += 1;
             _db.Products.Add(product);
             await _db.SaveChangesAsync();
         }
-
 
         public async Task<int> Delete(int productID)
         {
@@ -108,7 +110,6 @@ namespace VuonSenDaShop.Application.Catalog.Products
             _db.Products.Remove(product);
             return await _db.SaveChangesAsync();
         }
-
 
         public async Task<PagedResult<ProductViewMolde>> GetALLPaging(GetManageProductPagingRequest request)
         {
@@ -144,8 +145,6 @@ namespace VuonSenDaShop.Application.Catalog.Products
                 {
                     ProductId = x.p.ProductId,
                     ProductTranslationName = x.pt.ProductTranslationName,
-                    Avatar = x.p.Avatar,
-                    Thumb = x.p.Thumb,
                     DateCreate = x.p.DateCreate,
                     Dercription = x.pt.Dercription,
                     Details = x.pt.Details,
@@ -174,10 +173,12 @@ namespace VuonSenDaShop.Application.Catalog.Products
             var product = await _db.Products.FindAsync(request.Id);
             var productTranslations = await _db.ProductTranslations
                                                .FirstOrDefaultAsync(x => x.ProductId == request.Id
-                                               && x.LanguageId == request.LanguageId);
+                                              );
 
-            if (product == null || productTranslations == null)
+            if (product == null)
                 throw new VuonSenDaException($"Cannot Find a product with id: {request.Id}");
+            if (productTranslations == null)
+                throw new VuonSenDaException($"Cannot Find a productTranslations with id: {request.Id}");
 
             productTranslations.ProductTranslationName = request.ProductTranslationName;
             productTranslations.Dercription = request.Dercription;
@@ -185,7 +186,7 @@ namespace VuonSenDaShop.Application.Catalog.Products
             productTranslations.SeoAlias = request.SeoAlias;
             productTranslations.SeoDescription = request.SeoDescription;
             productTranslations.SeoTitle = request.SeoTitle;
-            productTranslations.ProductTranslationName = request.ProductTranslationName;
+            productTranslations.LanguageId = request.LanguageId;
             //save image
             if (request.ThumbnailImage != null)
             {
@@ -221,48 +222,113 @@ namespace VuonSenDaShop.Application.Catalog.Products
             return await _db.SaveChangesAsync() > 0;// save thành công sẽ là true và nguoc lai
         }
 
-        public async Task<int> AddImages(ImageCreateRequest request)
+        public async Task<int> AddImages(ImageRequest request, int productId)
         {
             var image = new ProductImage()
             {
-                ProductId = request.ProductId,
+                ProductId = productId,
                 Caption = request.Caption,
                 DateCreate = DateTime.Now,
-                FileSize = request.FileSize,
-                ImagePath = request.ImagePath,
                 IsDefault = request.IsDefault,
                 SortOrder = request.SortOrder
             };
+
+            if (request.ImageFile != null)
+            {
+                image.ImagePath = await this.SaveFile(request.ImageFile);
+                image.FileSize = request.ImageFile.Length;
+            }
+
             _db.ProductImages.Add(image);
-            return await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
+            return image.Id;
         }
 
         public async Task<int> RemoveImages(int imageId)
         {
-            var images = _db.ProductImages.Where(x => x.Id == imageId).FirstOrDefault();
-
+            var images = await _db.ProductImages.FindAsync(imageId);
+            if (images == null)
+                throw new VuonSenDaException($"Cannot Find a image with id product: {imageId}");
             _db.ProductImages.Remove(images);
             return await _db.SaveChangesAsync();
         }
 
-        public async Task<int> UpdateImages(ImageCreateRequest request)
+        public async Task<int> UpdateImages(ImageRequest request)
         {
             var image = await _db.ProductImages.FindAsync(request.Id);
             if (image == null)
                 throw new VuonSenDaException($"Cannot Find a image with id: {request.Id}");
-
-            image.Caption = request.Caption;
-            image.FileSize = request.FileSize;
-            image.ImagePath = request.ImagePath;
-            image.IsDefault = request.IsDefault;
-            image.SortOrder = request.SortOrder;
-
+            if (request.ImageFile != null)
+            {
+                image.Caption = request.Caption;
+                image.FileSize = request.ImageFile.Length;
+                image.ImagePath = await this.SaveFile(request.ImageFile);
+                image.IsDefault = request.IsDefault;
+                image.SortOrder = request.SortOrder;
+            }
             return await _db.SaveChangesAsync();
         }
 
-        public Task<List<ProductImageViewModel>> GetListImage(int productId)
+        public async Task<List<ProductImageViewModel>> GetListImage(int productId)
         {
-            throw new NotImplementedException();
+            return await _db.ProductImages
+                .Where(x => x.ProductId == productId)
+               .Select(x => new ProductImageViewModel()
+               {
+                   Id = x.Id,
+                   Caption = x.Caption,
+                   FilePath = x.ImagePath,
+                   FileSize = x.FileSize,
+                   IsDefault = x.IsDefault ? 1 : 0,
+                   productID = x.ProductId,
+                   sortOrder = x.SortOrder,
+                   DateCreated = x.DateCreate
+               }).ToListAsync();
+        }
+
+        public async Task<ProductViewMolde> GetById(int productId, string languageId)
+        {
+            var product = await _db.Products.FindAsync(productId);
+            var productTranslation = await _db.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == productId &&
+            x.LanguageId == languageId);
+
+            var productViewMolde = new ProductViewMolde()
+            {
+                ProductId = product.ProductId,
+                ProductTranslationName = productTranslation != null ? productTranslation.ProductTranslationName : null,
+                Price = product.Price,
+                OriginalPrice = product.OriginalPrice,
+                Details = productTranslation != null ? productTranslation.Details : null,
+                Dercription = productTranslation != null ? productTranslation.Dercription : null,
+                Stock = product.Stock,
+                ViewTime = product.ViewTime,
+                ViewCount = product.ViewCount,
+                SeoDescription = productTranslation != null ? productTranslation.SeoDescription : null,
+                SeoTitle = productTranslation != null ? productTranslation.SeoTitle : null,
+                SeoAlias = productTranslation != null ? productTranslation.SeoAlias : null,
+                LanguageId = productTranslation.LanguageId,
+                ProductCategoryId = product.ProductCategoryId
+            };
+            return productViewMolde;
+        }
+
+        public async Task<ProductImageViewModel> GetImageById(int imageId)
+        {
+            var image = await _db.ProductImages.FindAsync(imageId);
+            if (image == null)
+                throw new VuonSenDaException($"Cannot Find a image with id: {imageId}");
+
+            var ViewMolde = new ProductImageViewModel()
+            {
+                Caption = image.Caption,
+                FilePath = image.ImagePath,
+                FileSize = image.FileSize,
+                IsDefault = image.IsDefault ? 1 : 0,
+                productID = image.ProductId,
+                sortOrder = image.SortOrder,
+                DateCreated = image.DateCreate
+            };
+            return ViewMolde;
         }
     }
 }

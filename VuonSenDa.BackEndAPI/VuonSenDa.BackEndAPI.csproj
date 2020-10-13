@@ -16,4 +16,8 @@
     <ProjectReference Include="..\VuonSenDaShop.Application\VuonSenDaShop.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
 </Project>

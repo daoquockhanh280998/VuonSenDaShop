@@ -514,7 +514,7 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             Id = new Guid("7ed48c67-f62f-43df-ad4b-1ff27e5daf21"),
-                            ConcurrencyStamp = "d76e36db-099e-4dcb-8b43-52e6b1b3b910",
+                            ConcurrencyStamp = "11ce5b35-8268-4b66-848f-b368f614d8fe",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -591,7 +591,7 @@ namespace VuonSenDaShop.Data.Migrations
                         {
                             Id = new Guid("08f06ac0-5706-465e-ad7b-5bfa88117b00"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d820ae9-ea0e-4aac-b131-736c762cab5d",
+                            ConcurrencyStamp = "6836cb07-2260-4eb2-95b8-366231ef3ff1",
                             DOB = new DateTime(2020, 5, 28, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "daoquockhanh280998@gmail.com",
                             EmailConfirmed = true,
@@ -600,7 +600,7 @@ namespace VuonSenDaShop.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "daoquockhanh280998@gmail.co",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDoRlBNvhyj9ddARcXF8Mj2N5uph5Bfc4TnikZPtW4K0ED82yn40bffOmd0PT1YcKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDXHDwVyMYeDZSKOloM5pJXMa+lmCtMl6rsnSCwT3Z/ZeXwDRTWVRbU3XmR2j8eIGA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -620,26 +620,12 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<int>("ArticleCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ArticleName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<DateTime?>("DateCreate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Dercription")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
 
                     b.Property<int>("Position")
                         .ValueGeneratedOnAdd()
@@ -650,10 +636,6 @@ namespace VuonSenDaShop.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasDefaultValue(1);
-
-                    b.Property<string>("Thumb")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
 
                     b.Property<int>("ViewCount")
                         .HasColumnType("int")
@@ -679,29 +661,12 @@ namespace VuonSenDaShop.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ArticleCategoryName")
-                        .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<int>("ArticleMainCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<DateTime?>("DateCreate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Dercription")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
 
                     b.Property<int>("Position")
                         .ValueGeneratedOnAdd()
@@ -713,64 +678,165 @@ namespace VuonSenDaShop.Data.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(1);
 
-                    b.Property<string>("Thumb")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
                     b.HasKey("ArticleCategoryId");
-
-                    b.HasIndex("ArticleMainCategoryId");
 
                     b.ToTable("ArticleCategories");
                 });
 
-            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ArticleMainCategory", b =>
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ArticleCategoryTranslation", b =>
                 {
-                    b.Property<int>("ArticleMainCategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:IdentityIncrement", 1)
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ArticleMainCategoryName")
+                    b.Property<int>("ArticleCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ArticleCategoryTranslationName")
                         .IsRequired()
-                        .HasColumnType("varchar(255)")
-                        .HasMaxLength(255)
-                        .IsUnicode(false);
-
-                    b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
-                    b.Property<string>("CreateBy")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
-                    b.Property<DateTime?>("DateCreate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
 
                     b.Property<string>("Dercription")
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Details")
                         .HasColumnType("nvarchar(4000)")
                         .HasMaxLength(4000);
 
-                    b.Property<int>("Position")
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("varchar(5)")
+                        .HasMaxLength(5)
+                        .IsUnicode(false);
+
+                    b.Property<string>("SeoAlias")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("SeoDescription")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("SeoTitle")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(400)")
+                        .HasMaxLength(400);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleCategoryId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("ArticleCategoryTranslations");
+                });
+
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ArticleImage", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(1);
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Status")
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("FileSize")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("ArticleImages");
+                });
+
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ArticleTranslation", b =>
+                {
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasDefaultValue(1);
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Thumb")
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ArticleTranslationName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(400)")
+                        .HasMaxLength(400);
+
+                    b.Property<string>("Dercription")
+                        .HasColumnType("nvarchar(1000)")
+                        .HasMaxLength(1000);
+
+                    b.Property<string>("Details")
                         .HasColumnType("nvarchar(4000)")
                         .HasMaxLength(4000);
 
-                    b.HasKey("ArticleMainCategoryId");
+                    b.Property<string>("LanguageId")
+                        .IsRequired()
+                        .HasColumnType("varchar(5)")
+                        .HasMaxLength(5)
+                        .IsUnicode(false);
 
-                    b.ToTable("ArticleMainCategories");
+                    b.Property<string>("SeoAlias")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("SeoDescription")
+                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(500);
+
+                    b.Property<string>("SeoTitle")
+                        .HasColumnType("nvarchar(200)")
+                        .HasMaxLength(200);
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(400)")
+                        .HasMaxLength(400);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
+
+                    b.HasIndex("LanguageId");
+
+                    b.ToTable("ArticleTranslations");
                 });
 
             modelBuilder.Entity("VuonSenDaShop.Data.Entities.ClientAccount", b =>
@@ -861,7 +927,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 8, 16, 8, 10, 562, DateTimeKind.Local).AddTicks(9285));
+                        .HasDefaultValue(new DateTime(2020, 10, 13, 11, 3, 15, 986, DateTimeKind.Local).AddTicks(7599));
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -909,7 +975,7 @@ namespace VuonSenDaShop.Data.Migrations
                     b.Property<DateTime?>("DateCreate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2020, 10, 8, 16, 8, 10, 573, DateTimeKind.Local).AddTicks(7833));
+                        .HasDefaultValue(new DateTime(2020, 10, 13, 11, 3, 15, 998, DateTimeKind.Local).AddTicks(5130));
 
                     b.Property<string>("PictureName")
                         .IsRequired()
@@ -948,11 +1014,6 @@ namespace VuonSenDaShop.Data.Migrations
                         .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Avatar")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
@@ -979,10 +1040,6 @@ namespace VuonSenDaShop.Data.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.Property<string>("Thumb")
-                        .HasColumnType("nvarchar(4000)")
-                        .HasMaxLength(4000);
-
                     b.Property<int>("ViewCount")
                         .HasColumnType("int");
 
@@ -999,7 +1056,6 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductId = 1,
-                            Avatar = "hinh",
                             CreateBy = "Admin",
                             OriginalPrice = 25000m,
                             Price = 20000m,
@@ -1012,7 +1068,6 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductId = 2,
-                            Avatar = "hinh",
                             CreateBy = "Admin",
                             OriginalPrice = 45000m,
                             Price = 40000m,
@@ -1025,7 +1080,6 @@ namespace VuonSenDaShop.Data.Migrations
                         new
                         {
                             ProductId = 3,
-                            Avatar = "hinh",
                             CreateBy = "Admin",
                             OriginalPrice = 55000m,
                             Price = 50000m,
@@ -1585,11 +1639,41 @@ namespace VuonSenDaShop.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ArticleCategory", b =>
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ArticleCategoryTranslation", b =>
                 {
-                    b.HasOne("VuonSenDaShop.Data.Entities.ArticleMainCategory", "ArticleMainCategory")
-                        .WithMany("ArticleCategories")
-                        .HasForeignKey("ArticleMainCategoryId")
+                    b.HasOne("VuonSenDaShop.Data.Entities.ArticleCategory", "ArticleCategory")
+                        .WithMany("ArticleCategoryTranslations")
+                        .HasForeignKey("ArticleCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShopOnlineGamingPC.Data.Entities.Language", "Language")
+                        .WithMany("ArticleCategoryTranslations")
+                        .HasForeignKey("LanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ArticleImage", b =>
+                {
+                    b.HasOne("VuonSenDaShop.Data.Entities.Article", "Article")
+                        .WithMany("ArticleImages")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VuonSenDaShop.Data.Entities.ArticleTranslation", b =>
+                {
+                    b.HasOne("VuonSenDaShop.Data.Entities.Article", "Article")
+                        .WithMany("ArticleTranslations")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ShopOnlineGamingPC.Data.Entities.Language", "Language")
+                        .WithMany("ArticleTranslations")
+                        .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

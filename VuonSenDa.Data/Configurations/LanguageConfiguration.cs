@@ -14,7 +14,6 @@ namespace VuonSenDaShop.Data.Configurations
             builder.ToTable("Languages");
 
             builder.HasKey(x => x.LanguageId);
-
             builder.Property(x => x.LanguageId).IsRequired().IsUnicode(false).HasMaxLength(5);
 
             builder.Property(x => x.Name).IsRequired().HasMaxLength(20);

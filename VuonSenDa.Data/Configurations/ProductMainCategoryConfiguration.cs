@@ -15,7 +15,7 @@ namespace VuonSenDaShop.Data.Configurations
         {
             builder.ToTable("ProductMainCategories");
             builder.HasKey(x => x.ProductMainCategoryId);
-            builder.Property(x => x.ProductMainCategoryId).UseIdentityColumn();
+            builder.Property(x => x.ProductMainCategoryId).UseIdentityColumn(1, 1);
             builder.Property(x => x.Avatar).HasMaxLength(4000).IsRequired();
             builder.Property(x => x.Thumb).HasMaxLength(4000).IsRequired(false);
             builder.Property(x => x.Status).HasDefaultValue(Status.Active);
