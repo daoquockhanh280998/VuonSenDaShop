@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VuonSenDa.ViewModels.Catalog.Products;
@@ -12,6 +13,7 @@ namespace VuonSenDa.BackEndAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]// ủy quyền cho token
     public class ProductsController : ControllerBase
     {
         private readonly IPublicProductService _publicProduct;
