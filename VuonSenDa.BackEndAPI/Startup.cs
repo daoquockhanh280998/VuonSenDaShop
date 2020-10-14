@@ -5,15 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Umbraco.Core.Services.Implement;
 using VuonSenDa.Utilities.Constaints;
 using VuonSenDaShop.Application.Catalog.Products;
 using VuonSenDaShop.Application.Common;
+using VuonSenDaShop.Application.System.Users;
 using VuonSenDaShop.Data.EF;
+using VuonSenDaShop.Data.Entities;
 
 namespace VuonSenDa.BackEndAPI
 {
@@ -31,10 +35,17 @@ namespace VuonSenDa.BackEndAPI
         {
             services.AddDbContext<VuonSenDaShopDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString(SystemConstaints.MainConnectionString)));
+            services.AddIdentity<AppUser, AppRole>()
+                 .AddEntityFrameworkStores<VuonSenDaShopDbContext>()
+                 .AddDefaultTokenProviders();
             //Declare DI
             services.AddTransient<IStorageService, FileStorageService>();
             services.AddTransient<IPublicProductService, PublicProductService>();
             services.AddTransient<IManageProductService, ManageProductService>();
+            services.AddTransient<UserManager<AppUser>, UserManager<AppUser>>();
+            services.AddTransient<SignInManager<AppUser>, SignInManager<AppUser>>();
+            services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
+            services.AddTransient<IUserService, UsersService>();
 
             services.AddControllersWithViews();
 
