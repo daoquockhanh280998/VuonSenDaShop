@@ -1,7 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Umbraco.Core.Services.Implement;
 using VuonSenDa.Utilities.Constaints;
+using VuonSenDa.ViewModels.System.Users;
 using VuonSenDaShop.Application.Catalog.Products;
 using VuonSenDaShop.Application.Common;
 using VuonSenDaShop.Application.System.Users;
@@ -49,7 +52,13 @@ namespace VuonSenDa.BackEndAPI
             services.AddTransient<RoleManager<AppRole>, RoleManager<AppRole>>();
             services.AddTransient<IUserService, UsersService>();
 
-            services.AddControllers();
+            // do có RegisterValidatorsFromAssemblyContaining ở dươi nên k cần register lẽ từng cái
+            //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidation>();
+            //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidation>();
+
+            //RegisterValidatorsFromAssemblyContaining có nghĩa là đk tất cả các validator có cùng DLL vs thằng LoginRequestValidation tức là toàn bộ VuonSenDa.ViewModel điều đc validation
+            services.AddControllers().AddFluentValidation(fv =>
+                    fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidation>());
 
             services.AddSwaggerGen(c =>
             {
