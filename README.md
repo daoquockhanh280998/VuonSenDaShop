@@ -49,6 +49,8 @@
 	-cấu hình connectionString xog chọn Tools trên thanh công cụ trên visual -> Nuget Package -> Package Manager Console -> chọn project là data và gõ: Add-Miration Initial(tên tùy chọn) enter
 		-> tiếp theo ta  gõ update-database
 		
-#10 Swapger là giao diện để hiển thị danh sách những API mà k cần dùng trình duyệt
+# 10 Swapger là giao diện để hiển thị danh sách những API mà k cần dùng trình duyệt
 http://bekenty.com/add-swagger-to-your-web-api-in-asp-net-core-3/
-		
+
+# 9 Fluent Validation
+-https://docs.fluentvalidation.net/en/latest/
