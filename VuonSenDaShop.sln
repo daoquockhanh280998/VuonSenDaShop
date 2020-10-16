@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Infrastructure", "1.Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Domain", "2.Domain", "{7A32F529-4896-4ED2-983B-460AB619747D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VuonSenDa.AdminApp", "VuonSenDa.AdminApp\VuonSenDa.AdminApp.csproj", "{00D9AFF4-F7F3-4388-ADA4-7058ACAD8373}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,10 @@ Global
 		{FBAB3A37-5E59-4CF1-855A-C569E33F862F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBAB3A37-5E59-4CF1-855A-C569E33F862F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBAB3A37-5E59-4CF1-855A-C569E33F862F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00D9AFF4-F7F3-4388-ADA4-7058ACAD8373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00D9AFF4-F7F3-4388-ADA4-7058ACAD8373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00D9AFF4-F7F3-4388-ADA4-7058ACAD8373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00D9AFF4-F7F3-4388-ADA4-7058ACAD8373}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
